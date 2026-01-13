@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Ivan Montejo's amazing webpage</title>
+    <link rel="stylesheet" href="css/default.css" id="default" />
+    <meta charset="utf-8" />
+    <base target="_blank" />
+</head>
+<body>
+    <nav>
+        <a href="https://github.com/IvanInRainbows" class="imageHyperlink"><img src="img/github.png" alt="Github"></a>
+        <div class="switch-container">
+            <label class="theme-switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <ul>
+            <li data-id="0"><a>About this webpage</a></li>
+            <li data-id="1"><a>About me</a></li>
+            <li data-id="2"><a>Contact</a></li>
+            <li class="dropdown">
+                <!--Dropdown menu-->
+                <button class="dropbtn">Class notes</button> <!--Boton que despliega el dropdown-->
+                <div class="dropdown-content"> <!--Elementos desplegados por el dropdown-->
+                    <a data-id="3">Hipermedia</a>
+                </div>
+                <!--fin del dropdown menu-->
+            </li>
+        </ul>
+    </nav>
+    <!--############## Content starts #################-->
+    <main>
+        <!--############### Init #################-->
+        <section class="active">
+            <div class="titles" style="margin: 0 auto;">
+                <h1 style="font-size: 500%; margin-bottom: 0px; text-align: center;">Welcome!</h1>
+                <h2 style="margin-bottom: 0px; text-align: center;">To Ivan montejo's amazing webpage</h2>
+            </div>
+            <p style="text-align: center; margin-top: 300px; font-weight: bold;">
+                Hey! This is a "toy" page for the first week's assignment of the Building NLP applications course. The code in this webpage is mostly repurposed from another webpage that I did some years ago, which which you can find in another <a href="https://github.com/IvanInRainbows/TrabajoFinalHipermedia.github.io">repository</a>. I did this because I didn't want to submit a webpage that is uglier than a default HTML page from 1998 but I also didn't want to wage war against CSS to make it look so good that my team decides that I am going to do the front-end for the final project. By using this recycled code I can also implement a couple things that I had in mind but that never got to implement such as a night/day mode switch. So in this modified webpage you can find:
+            </p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 40px;">
+                <div style="max-width: 20%; text-align: center;">
+                    <h2>About me</h2>
+                    <p>
+                        In this section you can find some personal and professional information about me.
+                    </p>
+                </div>
+                <div style="max-width: 20%; text-align: center;">
+                    <h2>Contact</h2>
+                    <p>
+                        Here you can find some common ways to contact me or check some of my social networks. I also plan to make a working PHP for the email thing so just in case it's working (it's not) don't abuse it, please.
+                    </p>
+                </div>
+                <div style="max-width: 20%; text-align: center;">
+                    <h2>Class Notes</h2>
+                    <p>
+                        Here you can find some of my class notes. They'll mostly be in Spanish because I feel very proud of my webdev notes, I think they are cute but I am not feeling like translating all of those.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!--############### ABOUT ME #################-->
+        <section class="unactive">
+            <img src="img/IvanIMG.jpg" style="height: auto; width: 25%; display: inline-block; margin-left: 90px;" alt="">
+            <div class="titles">
+                <h1 style="font-size: 90px; margin: 30px;">Iván<br>
+                Montejo <br>
+                De Garcini</h1>
+            </div>
+
+            <h1 style="text-align: center;">Education</h1>
+            <div class="grid2col">
+                <div style="grid-column: 1; grid-row: 1;">
+                    <h2 style="text-align: right;">Universidad complutense de Madrid</h2>
+                    <h3 style="text-align: right;">Applied an computational linguistics<br> 2021 - 2025</h3>
+                </div>
+               <img style="grid-column: 2; grid-row: 1; align-self: center;" height="200px" width="200px" src="img/UCM.png" alt="">
+
+                <div style="grid-column: 2; grid-row: 2;">
+                    <h2 style="text-align: left;">U-Tad</h2>
+                    <h3 style="text-align: left;">Postgrad in GameDesign<br>2017 - 2018</h3>
+                </div>
+                <div style="grid-column: 1; grid-row: 2;"><img width="300px" src="img/utad.png" alt=""></div>
+
+
+                <div style="grid-column: 1; grid-row: 3;">
+                    <h2 style="text-align: right;">CEV Madrid</h2>
+                    <h3 style="text-align: right;">Vocational degree in 3D and videogame development<br>2015 - 2017</h3>
+                </div>
+               <img style="grid-column: 2; grid-row: 3; align-self: center;" width="300px" src="img/CEV.png" alt="">
+
+                <div style="grid-column: 2; grid-row: 4;">
+                    <h2 style="text-align: left;">IES Federico García Lorca</h2>
+                    <h3 style="text-align: left;">Grado medio de laboratorio de Fotografía<br>Desde 2013 hasta 2015</h3>
+                </div>
+                <div style="grid-column: 1; grid-row: 4;">
+                    <div id="imgSlider">
+                        <h2 name="back">&lt</h2>
+                        <img src="img/sliderPhotos/1.png" alt="">
+                        <h2 name="next">&gt</h2>
+                    </div>
+                    <script src="js/slider.js"></script>
+                </div>
+            </div>
+            
+            <h1 style="text-align: center;">Software skills</h1>
+            <ul class="flexVerticalStyle">
+                <div>
+                    <img src="img/py.png" alt="">
+                    <h2>Python</h2>
+                </div>
+                <div>
+                    <img src="img/unity.png" alt="">
+                    <h2>Unity 3D</h2>
+                </div>
+                <div>
+                    <img src="img/html.png" alt="">
+                    <h2>HTMl/CSS/JS</h2>
+                </div>
+                <div>
+                    <img src="img/csharp.png" alt="">
+                    <h2>C# para Unity</h2>
+                </div>
+                <div>
+                    <img src="img/git.png" alt="">
+                    <h2>GIT</h2>
+                </div> 
+                <div>
+                    <img src="img/maya.png" alt="">
+                    <h2>Autodesk Maya</h2>
+                </div>
+                <div>
+                    <img src="img/oop.png" alt="">
+                    <h2>Object Oriented Programming</h2>
+                </div>
+                <div>
+                    <img src="img/UE.png" alt="">
+                    <h2>Unreal Engine 4</h2>
+                </div> 
+                <div>
+                    <img src="img/Ps.png" alt="">
+                    <h2>Adobe Photoshop</h2>
+                </div>
+            </ul>  
+        </section>
+        <!--############### CONTACT #################-->
+        <section class="unactive">
+            <!--<img src="img/IvanIMG.jpg" style="height: 40%; width: 40%; display: inline-block;" alt="">-->
+            <div class="normTitle">
+                <h1>Contact</h1>
+            </div>
+            <p style="margin: 50px; font-weight: bold; text-align: center; margin-bottom: 70px;">
+                You can contact me though Linkedin or by sending me an e-mail using the form at the bottom of this page. You can also check the project in my GitHub.</p>
+            <div class="flexVerticalStyle">
+                <a href="https://www.linkedin.com/in/ivan-montejo-76a806110/">
+                    <img src="img/Linkedin.png" alt="">
+                    <h2>LinkedIn</h2>
+                </a>
+                <a href="https://github.com/IvanInRainbows">
+                    <img src="img/github.png" alt="">
+                    <h2>GitHub</h2>
+                </a>
+            </div>
+
+            <form action="sendmail" id="sendmail">
+                <h2>Send me an email (Doesn't work)</h2>
+                <label for="name">Name:</label>
+                <input type="text" name="name" size="30">
+                <br>
+                <label for="email">Email:</label>
+                <input type="email" name="email" size="30">
+                <br>
+                <label for="cuerpo">Write your message:</label><br>
+                <textarea name="emailbody" cols="80" rows="20" form="sendmail" style="resize: none;"></textarea>
+                <br>
+                <input type="submit" name="send" value="Send" class="normalBtn">
+                <input type="reset" name="reset" value="Delete text" class="normalBtn">
+            </form>
+        </section>
+
+        <!--############### Class Notes #################-->
+        <section class="unactive"><!--Hipermedia-->
+            <h1>APUNTES DE HIPERMEDIA</h1>
+			<div class="hipermediaSection">
+                <header class="hipermediaSectionHeader">
+                    SEMANA I - Pruebas
+                    <button class="plusBtn">+</button>
+                </header>
+                <div class="hipermediaSectionContent">
+                    <p>
+                        Hola
+                    </p>
+                </div>
+            </div>
+
+            <div class="hipermediaSection">
+                <header class="hipermediaSectionHeader">
+                    SEMANA IV - Forms
+                    <button class="plusBtn">+</button>
+                </header>
+                <div class="hipermediaSectionContent">
+                    <form action="" name="comments" onsubmit="debugForm()" target="_self"> <!--Pruebas con el Form-->
+                        <label for="fname">Nombre: </label>
+                        <input type="text" name="fname" id=""><br>
+
+                        <label for="surname">Apellido: </label>
+                        <input type="text" name="surname" id=""><br>
+
+                        <label for="comment">Comentario: </label>
+                        <input type="text" name="comment" id=""><br>
+
+                        <label for="anon">Anónimo</label>
+                        <input type="checkbox" name="anon"><br>
+
+                        <label for="commentColor">Seleccional el color de tu Comentario:</label><br>
+                        <input type="color" name="commentColor"><br>
+
+                        <input type="range"><br>
+
+                        <label for="favFruit">Su fruta favorita:</label>
+                        <select name="favFruit" id="favFruit">
+                            <option hidden selected value>--Seleccione una fruta--</option>
+                            <option value="naranja">Naranja</option>
+                            <option value="cereza">Cereza</option>
+                            <option value="melon">Melón</option>
+                            <option value="fresa">Fresa</option>
+                        </select><br>
+
+                        <input type="submit" value="submit">
+                        
+                        <table> <!--Pretendia hacer una tabla con la informacion del form, pero hay que usar PHP-->
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Comentario</th>
+                            <th>Fecha y hora</th>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <div class="hipermediaSection">
+                <header class="hipermediaSectionHeader">
+                    SEMANA VI - Position y Pseudoelementos
+                    <button class="plusBtn">+</button>
+                </header>
+                <div class="hipermediaSectionContent">
+                    <h1>Atributos de posiciones: position</h1>
+                    <p>
+                        Hay cinco posibles valores: static|absolute|fixed|relative|sticky|initial|inherit
+                    </p>
+                    <style>
+                        .table-test tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd){
+                            background-color: rgba(0, 0, 0, 0.1);
+                        }
+                    </style>
+                    <table class="table-test">
+                        <th>Valor</th>
+                        <th>Descripcion</th>
+                        <tr>
+                            <td>static</td>
+                            <td>Valor por defecto. Los elementos se renderizan en el mismo orden en el que aparecen en el código</td>
+                        </tr>
+                        <tr>
+                            <td>absolute</td>
+                            <td>El elemento se posiciona relativo a su primer elemento ascendente (ancestro, emparentado) que no tiene posicion estática</td>
+                        </tr>
+                        <tr>
+                            <td>fixed</td>
+                            <td>El elemento se posiciona relativo a la ventana del navegador</td>
+                        </tr>
+                        <tr>
+                            <td>relative</td>
+                            <td>The element is positioned relative to its normal position, so "left:20px" adds 20 pixels to the element's LEFT position</td>
+                        </tr>
+                        <tr>
+                            <td>sticky</td>
+                            <td>
+                                The element is positioned based on the user's scroll position
+                                <br>A sticky element toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>initial</td>
+                            <td>Sets this property to its default value.</td>
+                        </tr>
+                        <tr>
+                            <td>inherit</td>
+                            <td>Inherits this property from its parent element.</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <h1>Pseudoelementos</h1>
+                    <p>element: nth-child(i) n= teniendo un numero de hijos desde 0 a n, i es el elemento que queremos encontrar.
+                        <br>
+                        Sería como el
+                        i-abo elemento. Ejemplo, si tenemos 10 elementos e i==3 estamos seleccionando el tercer elemento hijo que es del tipo "element".
+                        También se pueden seleccionar solo los elementos pares o incluso cada N elementos (4n es cada cuatro elementos). 
+                        Esto se puede combinar como en la tabla de arriba para seleccionar, por ejemplo, los elementos pares hijos de los elementos 
+                        impares de los hijos de un elemento para hacer, por ejemplo, una seleccion tipo tablero de ajedrez tal y como aparece en la tabla de arriba.
+                        <br>
+                        Se puede ver como seleccionar elementos de cierto tipo/clase que cumplan la condicion del pseudoelemento
+                    </p>
+                    <style>
+                        .ul-pseudoel-test li:nth-child(1){
+                            color: red;
+                        }
+                        .ul-pseudoel-test li:last-child{
+                            color: blueviolet;
+                        }
+
+                        .ul-pseudoel-test li:nth-child(3n){
+                            background-color: rgba(0, 0, 0, 0.1);
+                        }
+                    </style>
+                    Lista de ejemplo:
+                    <ul class="ul-pseudoel-test">
+                        <li>aaaa</li>
+                        <li>bbbb</li>
+                        <li>cccc</li>
+                        <li>dddd</li>
+                        <li>eeee</li>
+                        <li>ffff</li>
+                        <li>gggg</li>
+                        <li>hhhh</li>
+                        <li>iiii</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hipermediaSection">
+                <header class="hipermediaSectionHeader">
+                    SEMANA VII - Degradados
+                    <button class="plusBtn">+</button>
+                </header>
+                <div class="hipermediaSectionContent">
+                    <style>
+                        .degradado {
+                            position: relative;
+                            display: inline-block;
+                            margin: 10px;
+                            margin-top: 70px;
+                            border: solid black 2px;
+                            width: 300px;
+                            height: 200px;
+                        }
+                        .degradado p{
+                            position: absolute;
+                            top: -40%;
+                        }
+
+                        .espana{
+                            background-image: linear-gradient(to bottom, red 0%, red 25%, gold 25%, gold 75%, red 75%, red 100%);
+                        }
+                    </style>
+                    <h1>Degradados</h1>
+                    <div class="degradado" style="background-image: linear-gradient(to right, #0100f2, rgb(255,255,255), #f60100);">
+                        <p>background-image: linear-gradient(to right, #0100f2, rgb(255,255,255), #f60100);</p>
+                    </div>
+                    <div class="degradado" style="background-image: linear-gradient(to right, #0100f2 0%, #0100f2 33.33%, rgb(255,255,255) 33.33%, rgb(255,255,255) 66.66%, #f60100 66.66%, #f60100 66.66%);">
+                        <p>background-image: linear-gradient(to right, #0100f2 0%, #0100f2 33.33%, rgb(255,255,255) 33.33%, rgb(255,255,255) 66.66%, #f60100 66.66%, #f60100 66.66%);</p>
+                    </div>
+                    <div class="degradado" style="background-image: linear-gradient(45deg, #0100f2 0%, #0100f2 33.33%, rgb(255,255,255) 33.33%, rgb(255,255,255) 66.66%, #f60100 66.66%, #f60100 66.66%);">
+                        <p>background-image: linear-gradient(45deg, #0100f2 0%, #0100f2 33.33%, rgb(255,255,255) 33.33%, rgb(255,255,255) 66.66%, #f60100 66.66%, #f60100 66.66%);</p>
+                    </div>
+                    <div class="degradado espana">
+                        <p>background-image: linear-gradient(to bottom, red 0%, red 25%, gold 25%, gold 75%, red 75%, red 100%);</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hipermediaSection">
+                <header class="hipermediaSectionHeader">
+                    SEMANA VIII - Atributo Display
+                    <button class="plusBtn">+</button>
+                </header>
+                <div class="hipermediaSectionContent">
+                    <style>
+                        .test-flex {
+                            position: relative;
+                            border: solid 5px #0100f2;
+                            background-color: azure;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: space-around;
+                            height: 200px;
+                            width: 340px;
+                        }
+
+                        .test-grid {
+                            position: relative;
+                            border: solid 5px #0100f2;
+                            background-color: azure;
+                            display: grid;
+                            grid-template-columns: repeat(3, 1fr);
+                            grid-gap: 5px;
+                            grid-auto-rows: minmax(20px, auto);
+                            height: 200px;
+                            width: 340px;
+                        }
+
+                        .testcell{
+                            border: blueviolet solid 3px;
+                            background-color: transparent;
+                        }
+
+                        .testTx {
+                            height: 20px;
+                            margin: 5px;
+                            padding: 5px;
+                            border: solid 4px blueviolet;
+                        }
+                    </style>
+                    <h1>Tipos de display</h1>
+                    <p> El atributo display puede ser de muchas maneras, las principales que vamos a usar son "block", "inline-block", "inline", 
+                        "flex", "justify-content" y "align-items". Tambien hay otro para hacer que los elementos se maqueten como si estuvieran en una 
+                        tabla. Tambien esta el atributo "grid", que crean una especie de estructura parecida a una tabla invisible para poder maquetarlo.
+                        Incluso se pueden superponer y extender igual que en tkinter.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                        <div class="test-flex">
+                            <div class="testTx">Test1</div>
+                            <div class="testTx">Test2</div>
+                            <div class="testTx">Test3</div>
+                            <div class="testTx">Test4</div>
+                            <div class="testTx">Test5</div>
+                            <p style="bottom: 0%; position: absolute; right: 0%; color: rgba(0, 0, 0, 0.3);">Flex</p>
+                        </div>
+                        <div class="test-grid">
+                            <div class="testcell" style="grid-row: 1; grid-column: 1;">1, 1</div>
+                            <div class="testcell" style="grid-row: 1; grid-column: 2/4;">2-3, 1</div>
+                            <div class="testcell" style="grid-row: 2; grid-column: 1;">1, 2</div>
+                            <div class="testcell" style="grid-row: 2; grid-column: 2;">2, 2</div>
+                            <div class="testcell" style="grid-row: 3; grid-column: 2/4;">2-3, 2</div>
+                            <div class="testcell" style="grid-row: 3/5; grid-column: 1;">1, 3-4</div>
+                            <div class="testcell" style="grid-row: 1/5; grid-column: 3;">3, 1-4</div>
+                            <p style="bottom: 0%; position: absolute; right: 0%; color: rgba(0, 0, 0, 0.3);">Grid</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hipermediaSection">
+                <header class="hipermediaSectionHeader">
+                    SEMANA IX - Listas y tablas
+                    <button class="plusBtn">+</button>
+                </header>
+                <div class="hipermediaSectionContent">
+                    <style>
+                        .horizontalList{
+                            display: flex;
+                            max-width: 1000px;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                        }
+                        .horizontalList li{
+                            border: solid rgb(100,130,255);
+                            padding: 3px;
+                            list-style-type: none;
+                            transition: ease-out 0.3s;
+                        }
+
+                        .horizontalList li:hover{
+                            transition: ease-out 0.3s;
+                            background-color: rgba(0, 0, 0, 0.1);
+                            cursor: pointer;
+                        }
+                        .vlist {
+
+                        }
+
+                        .vlist li ul{
+                            list-style-type: upper-roman;
+                            transition: ease-out 0.3s;
+                            background-color: transparent;
+                        }
+
+                        .vlist li:hover {
+                            transition: ease-out 0.3s;
+                            background-color: rgba(0, 0, 0, 0.1);
+                            cursor: pointer;
+                        }
+
+                        dl dt{
+                            list-style-type: disc;
+                        }
+
+                    </style>
+                    <h1>Listas</h1>
+                    Hay listas ordenadas:
+                    <ol>
+                        <li>Elemento 1</li>
+                        <li>Elemento 2</li>
+                        <li>Elemento 3</li>
+                    </ol>
+                    Y listas desordenadas
+                    <ul>
+                        <li>Elemento 1</li>
+                        <li>Elemento 2</li>
+                        <li>Elemento 3</li>
+                    </ul>
+                    Tambien se pueden poner listas en horizaontal poniendo los elementos como inline-block o como flex. Se puede tambien usar
+                    "transition:ease-out <span style="color: rgb(0,0,150);">[float|int]</span>s" para poner un tiempo de transicion entre el 
+                    estado al que cambia al hacer un hover y eso, se puede poner en la propia clase para la transicion de vuelta o en el 
+                    pseudoelemento para la transicion de "ida":
+                    <ul class="horizontalList">
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                        <li>PHP</li>
+                        <li>SQL</li>
+                    </ul>
+                    Lista vertical:
+                    <ul class="vlist">
+                        <li>Elemento 1</li>
+                        <li>Elemento 2</li>
+                        <li>Elemento 3</li>
+                        <li>
+                            <ul>
+                                <li>Elemento 1</li>
+                                <li>Elemento 2</li>
+                                <li>Elemento 3</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    la etiqueta "dl" se usa para listas de datos que dentro tienen terminos y descriptores
+                    <dl>
+                        <dt>El1
+                            <dl>adgsrgsr</dl>
+                        </dt>
+                        <dt>El2
+                            <dl>aasgadsfdgjf</dl>
+                        </dt>
+                        <dt>El3
+                            <dl>qwertyuiop</dl>
+                        </dt>
+                    </dl>`
+
+                    <h1>Tablas</h1> 
+                    <style>
+                        tr th{
+                            background-color: rgba(0, 70, 200, 0.2);
+                        }
+
+                        .checkerTable{
+
+                        }
+
+                        .checkerTable tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd){
+                            background-color: rgba(0, 0, 0, 0.1);
+                        }
+                    </style>
+                    <table class="checkerTable">
+                        <tr> 
+                            <th style="border: none; background: transparent;">x_i_j</th>
+                            <th>x_i_1</th>
+                            <th>x_i_2</th>
+                            <th>x_i_3</th>
+                            <th>x_i_4</th>
+                        </tr>
+                        <tr>
+                            <th>x_1_j</th>
+                            <td>x_1_1</td>
+                            <td>x_1_2</td>
+                            <td>x_1_3</td>
+                            <td>x_1_4</td>
+                        </tr>
+                        <tr>
+                            <th>x_2_j</th>
+                            <td>x_2_1</td>
+                            <td>x_2_2</td>
+                            <td>x_2_3</td>
+                            <td>x_2_4</td>
+                        </tr>
+                        <tr>
+                            <th>x_3_j</th>
+                            <td>x_3_1</td>
+                            <td>x_3_2</td>
+                            <td>x_3_3</td>
+                            <td>x_3_4</td>
+                        </tr>
+                        <tr>
+                            <th>x_4_j</th>
+                            <td>x_4_1</td>
+                            <td>x_4_2</td>
+                            <td>x_4_3</td>
+                            <td>x_4_4</td>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="hipermediaSection">
+                <header class="hipermediaSectionHeader">
+                    SEMANA X - Tablas y multimedia
+                    <button class="plusBtn">+</button>
+                </header>
+                <div class="hipermediaSectionContent">
+                    <h1>Tablas parte 2</h1>
+                    <table class="checkerTable">
+                        <tr> 
+                            <th style="border: none; background: transparent;">x_i_j</th>
+                            <th>x_i_1</th>
+                            <th>x_i_2</th>
+                            <th>x_i_3</th>
+                            <th>x_i_4</th>
+                        </tr>
+                        <tr>
+                            <th>x_1_j</th>
+                            <td>x_1_1</td>
+                            <td>x_1_2</td>
+                            <td>x_1_3</td>
+                            <td>x_1_4</td>
+                        </tr>
+                        <tr>
+                            <th>x_2_j</th>
+                            <td>x_2_1</td>
+                            <td>x_2_2</td>
+                            <td>x_2_3</td>
+                            <td>x_2_4</td>
+                        </tr>
+                        <tr>
+                            <th>x_3_j</th>
+                            <td>x_3_1</td>
+                            <td>x_3_2</td>
+                            <td>x_3_3</td>
+                            <td>x_3_4</td>
+                        </tr>
+                        <tr>
+                            <th>x_4_j</th>
+                            <td>x_4_1</td>
+                            <td>x_4_2</td>
+                            <td>x_4_3</td>
+                            <td>x_4_4</td>
+                    </table>
+
+                    <p>
+                        La etiqueta "thead" designa la cabecera de la tabla, pero al parecer no aplica ningun estilo, para eso se usa "th". <br>
+                        la etiqueta "colgroup" se usa para dar un estilo a toda una columna. Se aplica de forma que la etiqueta "col" 
+                        que se pone dentro de la etiqueta se aplica a la primera columna de la tabla. Col(1) se aplica a x_1_1...x_i_1,
+                        es decir, col(j) -> x_1_j ... x_i_j. Se puede usar span para extender su rango d eaplicacion a mas de una columna contigua
+                    </p>
+                    <style>
+                        .tablaSX1{
+                            min-width: 300px;
+                        }
+
+                        .tablaSX1 th{
+                            height: 40px;
+                            min-width: 80px;
+                            background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.3));
+                        }
+
+                        .tablaSX1 tr td:last-child{
+                            color: #f60100;
+                            text-align: right;
+                        }
+                    </style>
+                    <table class="tablaSX1">
+                        <thead>
+                            <colgroup>
+                                <col span="1" style="background-color: rgba(255, 0, 0, 0.1);">
+                            </colgroup>
+                            <tr>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>123</td>
+                                <td>456</td>
+                                <td>789</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Cuando se introduce una tabla en un contenedor se le deberia poner a este contenedor el atributo "overflow-y: ".
+                        Esto es para controlar el desbordamiento (que el contenido sea mas grande que el contenedor),
+                        podemos poner tanto en x como en y y ponerle que haya una barra de scroll y cosas asi. "colspan" y "rowspan" para 
+                        expandir una columna o fila a varias <br></p>
+                    <h1>Etiquetas multimedia</h1>
+                    <p>Las etiquetas multimedia se usan para introducir, valga la redundancia, archivos multimedia de audio, video, etc.
+                        Al igual que el resto de etiquetas tambien pueden llevar atributos, algunos exigen valores pero tambien pueden ser 
+                        booleanos y que solo sea necesario poner el nombre del atributo, por ejemplo, "autoplay", "loop" o "controls". 
+                        Las etiquetas multimedia requieren de una fuente o source (atributo src o con otra etiqueta dentro de la etiqueta 
+                        correspondiente que sea "source").
+                    </p>
+                    <audio controls autoplay loop>
+                        <source src="media/houseofcards.mp3">
+                    </audio>
+                </div>
+            </div>
+
+            <div class="hipermediaSection">
+                <header class="hipermediaSectionHeader">
+                    SEMANA XI - Multimedia y JavaScript
+                    <button class="plusBtn">+</button>
+                </header>
+                <div class="hipermediaSectionContent">
+                    <h1>Etiquetas multimedia, continuación</h1>
+                    <p>
+                        Se puede poner fondo al audio tambien, en el siguiente audio lo improviso con css con el atributo background-image y
+                        varios atributos
+                    </p>
+                    <audio controls autoplay loop style="background-image: url(img/IR.jpg); width: 300px; height: 300px; background-size: 300px;">
+                        <source src="media/houseofcards.mp3">
+                    </audio>
+                    <h1>JavaScript</h1>
+                    <p>
+                        Javascript es un lenguaje de OOP interpretado y esas cosas. PAra escribir algo en el documento html se usa 
+                        document.write(). En las listas no se puede acceder al indice #-1 de una lsitab para acceder al ultimo como 
+                        en python.
+                    </p>
+                    <script>
+                        document.write("Hola, mundo");
+                        let lista = [1,2,3,4,5,6,7];
+                        document.write(lista[6]);
+                        document.write("<br>");
+                        document.write("El sexto elemento de la lista es un "+typeof(lista[6]))
+                        lista[6] = "hola"
+                        document.write("<br>El sexto elemento de la lista es un " + typeof(lista[6]))
+                    </script>
+                    <p>
+                        Se supone que a la hora de nombrar las variables la convencion es que empiecen con la inicial de su tipo, pero 
+                        ¿Que sentido tiene hacerlo en un lenguaje con tipado dinamico?
+                    </p>
+                    <script>
+                        let nMiLet = 0;
+                        var nMiVar = 1;
+                        document.write("<br>nMiLet = "+nMiLet);
+                        document.write("<br>nMiVar = "+nMiVar);
+                        document.write("<br>la variable de tipo 'let' es de tipo "+typeof(nMiLet)+"<br>la variable de tipo 'var' es de tipo "+typeof(nMiVar));
+                        nMiLet = ["mi", "lista"];
+                        nMiVar = "asdasd";
+                        document.write("<br><br>la variable de tipo 'let' es de tipo "+typeof(nMiLet)+"<br>la variable de tipo 'var' es de tipo "+typeof(nMiVar));
+                        document.write("<br>nMiLet = "+nMiLet);
+                        document.write("<br>nMiVar = "+nMiVar);
+
+                        var hola = [1,2,3,5];
+                        document.write("<br>"+hola.length);
+                        hola.length = 0;
+                        document.write("<br>"+hola+hola.length);
+                    </script>
+                    <p>Por cierto, comprobado que JS parece no tener asignaciones simultaneas. Para mi sorpresa se puede modificar la
+                         longitud de una lista simplemente cambiando el lenght, cosas raras de JS.
+                         Parece que tambien al comprobar el tipo de un objeto simplemente devuelve que es un objeto (ahora entiendo por 
+                         que todo el mundo odia JS), para acceder al nombre de la clase a la que pertenece el objeto se usa 
+                         "objeto.constructor.name"<br>
+                    </p>
+                    <script>
+                        let objeStr = [1,2,3,4];
+                        document.write(
+                            "El objeto es de tipo: " + typeof(objeStr) +
+                            "<br>Pero es una instancia de la clase: "+objeStr.constructor.name
+                        );
+                    </script>
+                    <button onclick="alert('Alerta!!')">Botón</button>
+                </div>
+            </div>
+
+            <div class="hipermediaSection">
+                <header class="hipermediaSectionHeader">
+                    SEMANA XII - Tablas con JavaScript
+                    <button class="plusBtn">+</button>
+                </header>
+                <div class="hipermediaSectionContent">
+                    <h1>Seguimos con JS</h1>
+                    <p>
+                        Bueno, en JS ya vimos que para acceder al nombre de la clase de un objeto hay que acceder al contructor y 
+                        ahi a su nombre, al pedir el tipo(typeof) de un objeto solo nos devuelve.
+                    </p>
+                    <script>
+                        var box = new Object();
+                        box = {
+                            field1 : 2,
+                            field2: 3,
+                            method : function(){
+                                return this.field1 * this.field2;
+                            }
+                        }
+
+                        document.write("<br>Nuestro objeto es de tipo: "+typeof(box));
+                        document.write("<br>Pero el nombre del constructor del mismo objeto es: " + box.constructor.name+"<br> Es decir, en JS hay una clase para objeto genérico pero es diferente al propio tipo (los distingue la mayuscula al principio)");
+                    </script>
+                    <p>Vamos a probar a hacer nuestra propia clase para ver como es:</p>
+                    <script>
+                        class MiObj {
+                            constructor(field1,field2){
+                                this.field1 = field1;
+                                this.field2 = field2;
+                            }
+                            timesFields() {
+                                return this.field1*this.field2;
+                            }
+                        }
+                        miobj = new MiObj(2,2);
+                        document.write("<br>Nuestro objeto es de tipo: "+typeof(miobj));
+                        document.write("<br>Pero el nombre del constructor del mismo objeto es: " + miobj.constructor.name)
+                    </script>
+                    <p><br>Con esto de declarar clases y crear instancias podemos crear, por ejemplo, una clase que haga automaticamente una tabla a traves de una matriz:</p>
+                    <script>
+
+                        
+                        class TablaAuto {
+                            /*
+                            Esta clase toma una matriz y la convierte en una tabla.
+                            Simplemente toma una matriz (lista de lineas o rows con los datos dentro) y la recorre mediante dos bucles anidados
+                            Tambien se le puede pasar un header.
+                            */
+                            constructor(matrix, header = []) {
+                                this.matrix = matrix; //Debe ser una lista de listas
+                                this.header = header; //Debe ser una lista normal
+                            }
+                            printTable(){ 
+                                document.write("<table>");
+                                if (this.header.length > 0){
+                                    document.write("<tr>");
+                                    for(let i=0;i<this.header.length;i++){
+                                        document.write("<th>"+this.header[i]+"</th>")
+                                    }
+                                    document.write("</tr>");
+                                }
+                                for(let i=0;i<this.matrix.length;i++){
+                                    let currentLine = this.matrix[i];
+                                    document.write("<tr>");
+                                    for(let j=0;j<currentLine.length;j++){
+                                        document.write("<td>"+currentLine[j]+"</td>");
+                                    }
+                                    document.write("</tr>");
+                                }
+                                document.write("</table>");
+                            }
+                        }
+                        let datos = [["x11","x12","x13"],["x21","x22","x23"],["x31","x32","x33"]];
+                        let tabla = new TablaAuto(datos, header = ["col1", "col2", "col3"]);
+                        tabla.printTable();
+                        document.write(`Esta tabla esta creada mediante un objeto cuya clase se llama: ${tabla.constructor.name}`); //Madre mia que para crear templates hay que poner el acento al revés rarisimo
+                    </script>
+                    <p><br>Voy a probar a crear una tabla de inputs que tenga tantas lineas y columnas como el usuario ponga en un input</p>
+                    <form name="tablesize" id="tablesize" onsubmit="console.log('asfaw')">
+                        <label for="columnas"></label>
+                        <input type="number" id="tablecol">
+
+                        <label for="filas"></label>
+                        <input type="number" id="tablerows">
+
+                        <button type="submit">Submit</button>
+                    </form>
+                    <div id="JSTable">
+
+                    </div>
+                    <script>
+                        let columnas = 0;
+                        let filas = 0;
+                        let tableform = document.getElementById("tablesize");
+                        let jsTable = document.getElementById("JSTable");
+                        tableform.addEventListener("submit", (e)=>{
+                            e.preventDefault();
+                            columnas = document.getElementById("tablecol").value;
+                            filas = document.getElementById("tablerows").value;
+                            let toAppend = "";
+                            toAppend += "<table>";
+                            for(let i = 0; i < filas;i++){
+                                toAppend += "<tr>";
+                                for(let j = 0 ; j < columnas; j++){
+                                    toAppend += "<td>"+i+j+"</td>";
+                                }
+                                toAppend += "</tr>";
+                            }
+                            toAppend += "</table>";
+                            jsTable.innerHTML = toAppend;
+                        })
+                        //Esto de las siguientes lineas es una prueba de generacion de tablas con matrices y condicionales y tal
+                        let abc = 10;
+                        if (abc < 0){
+                            console.log("abc es igual a "+abc);
+                        } else{
+                            console.log("abs es mayor que cero")
+                        }
+
+
+                        let mat = [ [0,1,2],
+                                    [3,4,5]];
+                                    
+                        let toAppend = "";
+                        toAppend += "<table>";
+                        for(let i = 0; i < mat.length;i+=1){
+                            toAppend=toAppend+"<tr>";
+                            for(let j = 0;j < mat[i].length;j++){
+                                toAppend+="<td>"+mat[i][j]+"</td>";
+                            }
+                            toAppend=toAppend+"</tr>";
+                        }
+                        toAppend += "<table>";
+                        jsTable.innerHTML=toAppend;
+                    </script>
+
+                </div>
+            </div>
+
+            <div class="hipermediaSection" id="Reproductor">
+                <header class="hipermediaSectionHeader">
+                    REPRODUCTOR
+                    <button class="plusBtn">+</button>
+                </header>
+                <div class="hipermediaSectionContent">
+                    <div class="videoPlayer">
+                        <video width="720" src="media/I understand nothing.mp4"></video>
+                        <button class="playBtn">&#9658;</button>
+
+                        <div class="sliderBox">
+                            <div class="progressBar">
+                                <!--<button class="timeSlider">.</button>-->
+                            </div>
+                        </div>
+
+                        <div class="volumeSliderBox">
+                            <button class="muteBtn">🔊</button>
+                            <input type="range" name="volume" min="0" max="100" style="position: absolute; right: 5%;">
+                        </div>
+                        <div class="timejump">
+                            <button name="backward">&#60;&#60;10</button>
+                            <button name="forward">10&#62;&#62;</button>
+                        </div>
+
+                    </div>
+                    <script src="js/videoPlayerControls.js"></script>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+    <!--############## End of Content #################-->
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd31Qqty9TvlRaBG4JAVilk1Lpr3OtSZEJQ4czDVR8HUugDtQ/viewform?usp=sf_link"><button id="bugRepBtn">
+        <div style="height: 100%; width: 100%; display: flex; flex-wrap: nowrap;">
+            <img src="img/bug.png" alt="{BUG}">
+        </div>
+    </button></a>
+    <!--############## Footer #################-->
+    <footer id="footer">
+        <p>Made by: Ivan Montejo de Garcini<br>Elburgoimontejo@gmail.com</p>
+    </footer>
+    <!--############## Footer #################-->
+    <script src="js/changeCSS.js"></script>
+</body>
+
+<script> //Esto pensaba ponerlo arriba pero por alguna razon solo funciona si esta despues del codigo en html
+    document.querySelectorAll('nav ul li').forEach(e => { //Añado evento para que al hacer click a cietos elementos me ejecute la funcion de abajo
+        if (e.className != 'dropdown'){ //No añado el/los elementos que sean para el dropdown.
+            e.addEventListener('click', _ => change(e.dataset.id))
+        }
+    })
+    document.querySelectorAll('nav ul li div a').forEach(e => e.addEventListener('click', _ => change(e.dataset.id))) //añadp el evento tambien a los elementos del dropdown
+    
+    document.querySelectorAll('main section div header button').forEach(e => {
+        e.addEventListener('click', _ => toggleDisplay(e))
+    })
+
+    function change(n) { //He dividido los elementos en secciones, que se van mostrando/ocultando cuando hacemos click en los elementos de la barra de navegacion
+        let panels = document.querySelectorAll('main section')
+        panels.forEach(p => {
+            p.classList.remove('active')
+            p.classList.add('unactive')
+        })
+        panels[n].classList.remove('unactive')
+        panels[n].classList.add('active')
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function toggleDisplay(el){
+        el.parentNode.parentNode.childNodes.forEach(element => {
+            if (element.className == 'hipermediaSectionContent') {
+                console.log(element.style.display)
+                if (element.style.display == 'none' || element.style.display === ""){
+                    element.style.display = 'block'
+                } else{
+                    element.style.display = 'none'
+                }
+            }
+        });
+    }
+</script>
+
+</html>
