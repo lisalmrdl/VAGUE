@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <style>
+      /* add colors to heading */
+      :root {
+          --color-text-content: #232537;
+          --color-text-header: #2B2D42;
+          --color-bg-main: #EDF2F4;
+          --color-bg-focused: #E1E7EC;
+          --padding-header: 25px 0px;
+          --padding-other: 15px 20px;
+          --border-width-default: 1px;
+      }
+      h1, h2 {
+          color: var(--color-text-header);
+          padding: var(--padding-header);
+          margin-top: 1.5em;
+      }
+      h1 {
+          font-size: 3rem;
+      }
+      h2 {
+          font-size: 1.5rem;
+      }
+      table, th, td {
+          border: var(--border-width-default) solid var(--color-text-header);
+      }
+      caption {
+          font-style: italic;
+          font-size: 12px;
+      }
+      .banner {
+          background-color: var(--color-bg-main); 
+          color: (--color-text-content);
+          height: 150px;             
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+      }
+      body {
+          background: white;
+          position: relative;
+          padding: 20px;
+          border-radius: 12px 12px 0 0; /* optional, very common */
+      }
+    </style>
+    <title>Suchanya Website for LDA-T316</title>
+    <div class="banner">
+      <h1>My Website</h1>
+    </div>
+  </head>
+  <h2>About Me:</h2>
+  <p>Hi! I'm Suchanya Limpakom. I'm currently studying Cognitive Science in the Linguistic Diversity and Digital Humanities Masters at University of Helsinki. I'm interested in human cognition and how people interact with complex systems. In my free time, I enjoy making things learning new skills.
+
+My email address is of the form first_name.last_name@helsinki.fi.</p>
+  
+  <h2>HTML Practice</h2>
+
+  <body style="font-size: 18px;">
+    <p style="font-style: italic;">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+    <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" width="600">
+    <p> <a href="https://www.geeksforgeeks.org/html/html-tutorial/">This link</a>
+      takes you to w3schools HTML tutorial</p>
+    <b><u>Remember:</u></b>
+    <ul>
+      <li>you can use tags to bold text.</li>
+      <li>or <i>i for italics</i></li>
+    </ul>
+
+    <table>
+      <tr>
+        <th>Thing</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Apples</td>
+        <td>300</td>
+      </tr>
+      <tr>
+        <td>Bananas</td>
+        <td>500</td>
+      </tr>
+      <caption>This is a table of things.</caption>
+    </table>
+  </body>
+
+</html>
