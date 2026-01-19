@@ -1,0 +1,14 @@
+.bloc-horizontal {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.image-verticale {
+    max-width: 250px;
+    height: auto;
+}
+
+.contenu-texte {
+    flex: 1;
+}
