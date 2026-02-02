@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'Jersey 25';
+    src: url('../fonts/Jersey_25/Jersey25-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Khand';
+    src: url('../fonts/Khand/Khand-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    font-family: 'Khand', sans-serif;
+    height: 100%; /* required for flex approach */
+
+    --color-mono-b: #2D232E;
+    --color-mono-g: #ccc;
+    --color-mono-l: #f4f4f4;
+    --color-mono-w: #ffffff;
+
+    --color-accent-r: #b0413e;
+    --color-accent-g: #c2d0cb;
+    --color-accent-y: #f6ffe7;
+    --color-accent-b: #b4c4d0;
+
+    --color-accent-dr: #7d2e2c;
+}
+body {
+    margin: 0;  /* This makes the header fill the top of the screen, unsure why */
+}
+
+header {
+    padding: 10px 30px;
+    font-family: 'Jersey 25', sans-serif;
+    color: var(--color-mono-w);
+    
+    /* This makes the size of the header banner 'fits' the screen */
+    box-sizing: border-box;
+    width: 100vw;
+    
+    background-color: var(--color-mono-b);
+    
+    /* Flex makes the items (LOGO    search bar) display inline */
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between; /* Distribute space between the logo and search bar */
+}
+
+/* Styling for the search bar container */
+.search-bar {
+    display: flex;
+    gap: 10px; /* Space between the search input and button */
+    border: 3px solid transparent; 
+    border-radius: 5px;
+
+    /* inside */
+    padding: 10px;
+    max-width: 60%;
+}
+
+.search-bar #user-query {
+    font-family: 'Khand', sans-serif;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    width: 300px;
+    border: 2px solid var(--color-mono-g);
+    background-color: var(--color-mono-l);
+    color: var(--color-mono-b);
+}
+
+/* Style for the submit button */
+#search-button {
+    font-family: 'Khand', sans-serif;
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    background-color: var(--color-accent-r);
+    color: var(--color-mono-w);
+    border: 2px solid var(--color-accent-dr);
+    border-radius: 5px;
+    cursor: pointer; /* Cursor turns into a pointer when hovering */
+    transition: ease;
+}
+
+/* Hover effect for the button */
+#search-button:hover {
+    background-color: var(--color-accent-dr);
+    border: 2px solid var(--color-accent-dr);
+    color: var(--color-mono-g);
+}
+
+/* Optional: Add focus styles for the text input */
+#user-query:focus {
+    border-color: var(--color-accent-r);
+    outline: none;
+}
+
+.body-container {
+    padding: 15px;
+}
+
+footer {
+    padding: 5px;
+    color: var(--color-mono-w);
+    
+    /* This makes the size of the header banner 'fits' the screen */
+    box-sizing: border-box;
+    width: 100vw;
+    
+    background-color: var(--color-mono-b);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+a:link, a:visited {
+    color: var(--color-mono-w);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    color: var(--color-mono-w);
+}
