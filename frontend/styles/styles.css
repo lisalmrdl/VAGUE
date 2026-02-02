@@ -49,6 +49,15 @@ header {
     justify-content: space-between; /* Distribute space between the logo and search bar */
 }
 
+.logo, .logo:hover {
+    font-size: 2.5rem;
+    justify-content: center;
+    align-content: center;
+    padding: 10px;
+    /* border: 2px solid var(--color-mono-w); */
+    text-decoration: none;
+}
+
 /* Styling for the search bar container */
 .search-bar {
     display: flex;
