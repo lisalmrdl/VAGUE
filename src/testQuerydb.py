@@ -13,7 +13,28 @@ cur = conn.cursor()
 print(f"Testing queries")
 
 pprint(cur.execute("""
-                    SELECT DISTINCT genres FROM games
+                    SELECT COUNT(*) FROM game
+                  """).fetchall())
+print("NEW QUERY")
+pprint(cur.execute("""
+                    SELECT g.name as games, GROUP_CONCAT(gen.name, ', '), g.metacritic as genres FROM 
+                    genre gen NATURAL JOIN has_genre x
+                    JOIN game g ON x.id_game == g.id_game
+                    WHERE   g.metacritic > 80 AND
+                            g.released > "2010/01/01" AND
+                            g.released < "2024/01/01"
+                    GROUP BY g.name
+                    ORDER BY g.metacritic DESC
+                    LIMIT 10
+                  """).fetchall())
+print("NEW QUERY")
+pprint(cur.execute("""
+                    SELECT d.name, AVG(g.rating) 
+                    FROM game g NATURAL JOIN developed
+                    JOIN company d ON d.id_company == developed.id_company
+                    GROUP BY d.name
+                    ORDER BY AVG(g.rating) DESC
+                    LIMIT 10
                   """).fetchall())
 
 conn.close()
