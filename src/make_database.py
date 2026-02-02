@@ -66,5 +66,5 @@ pprint(cur.execute("""
                     ORDER BY metacritic DESC
                   """).fetchall())
 print(f"That query took: {time.time() - t} seconds\n")
-
+conn.commit()
 conn.close()
