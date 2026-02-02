@@ -1,0 +1,8 @@
+Template : Date - Number of hours
+	   Name : Brief note on what you have worked on
+
+24/01 - 3 hours
+Lisa : Implementation of the boolean search. It works well and can be based on different categories. Each category has their own vector to allow it + a general vector if the category is not described. I still need to implement a correct answer when a query is invalid or when the game is not in the database.
+
+31/01 - 1 hour
+Lisa : Implementation of the stemming searches while using the Boolean Search as a base. I saw Ivan searches and Ina's tf-idf search, we need to mix everything to make the search motor for next week. Done with the project planning description at the same time.
