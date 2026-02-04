@@ -1,0 +1,34 @@
+Template : Date - Number of hours
+	   Name : Brief note on what you have worked on
+all:
+12/01 - 1,5 hours
+introduction of the group, brainstorming topics, rough draft of ideas
+
+19/01 - 1,5 hours
+data retrieval organisation, problem discussions
+
+26/01 - 1,5 hours
+search engine organisation, problem discussions
+
+02/02 - 1,5 hours
+front-end options, filtering for database, problem discussions
+
+
+individual work:
+24/01 - 3 hours
+Lisa : Implementation of the boolean search. It works well and can be based on different categories. Each category has their own vector to allow it + a general vector if the category is not described. I still need to implement a correct answer when a query is invalid or when the game is not in the database.
+
+29/01 - 2 hours
+Ina: implementation of tf-idf with Lisa's former work of boolean search
+
+26/01 - 2 hours
+Ivan : Multi-word matching based on the Boolean search implemented.
+
+28/01 - 1 hour
+Ivan : Wildcard/pattern matching queries implemented (in the RefinedSearchCD.py). As an extra it is capable of running regex because I am just taking the input and using it as a pattern for a regex.
+
+31/01 - 1 hour
+Lisa : Implementation of the stemming searches while using the Boolean Search as a base. I saw Ivan searches and Ina's tf-idf search, we need to mix everything to make the search motor for next week. Done with the project planning description at the same time.
+
+02/02 - 3 hours
+Ivan : Re-fetched data to include images and exclude very explicit games. Reworked the SQL database's schema to make it relational (more efficient), now developers/publishers and genres are tables that are related to game's entries. And modified the script for fetching data so that it pushes it directly into the database (no worries, the json is also kept and updated).
