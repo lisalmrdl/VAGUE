@@ -2,12 +2,14 @@ import os, json, time
 import sqlite3 as sql
 from pathlib import Path
 from pprint import pprint
+import database as db
 
 path = Path(os.path.abspath(os.path.dirname(__file__)))
 db_path = path / ".." / "data" / "games.db"
 print(os.path.abspath(db_path))
 conn = sql.connect(db_path)
 cur = conn.cursor()
+
 
 
 print(f"Testing queries")
@@ -56,5 +58,8 @@ pprint(cur.execute("""
                     ORDER BY g.metacritic
                     LIMIT 10
                   """).fetchall())
+print("NEW QUERY")
+pprint(db.get_text_gamedata(limit=1))
+
 
 conn.close()
