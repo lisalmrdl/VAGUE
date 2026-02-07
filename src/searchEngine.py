@@ -27,15 +27,11 @@ vocab_cols = pd.Series(tfidf_matrix.columns)
 
 #boolean
 boolean_dict = db.load_boolean_vectors()
-boolean_dict["any"] = (tfidf_matrix != 0).astype('int8')
+boolean_dict["any"] = (tfidf_matrix != 0).astype('int8') # NOTE: Temporary fix, turn everything that is not 0 into one.
 boolean_unified = boolean_dict["any"] # NOTE: careful, this is a pointer
-#boolean_unified = boolean_dict.get('genres', pd.DataFrame())
-#if 'name' in boolean_dict:
-#    boolean_unified = boolean_unified.join(boolean_dict['name'], lsuffix='_gen', rsuffix='_nam', how='outer').fillna(0)
 
 #text for the exact match
 all_data = pd.read_sql(db.get_text_gamedata(as_text=True), db.conn) # NOTE: No need to load de data yet. We can first compute the search. DELETE
-print(all_data.columns)
 if not all_data.empty:
     search_text_ref = all_data.set_index('id_game')['description'].fillna("").str.lower()
 else:
@@ -130,11 +126,7 @@ def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: i
         
     if not raw_tokens:
         return []
-
-    #built of the request vector
-    vocab = pd.Series(matrix.columns)
     
-    #query_vec = pd.Series(0, index=matrix.columns, dtype=pd.SparseDtype("float32", 0))
     vectorizer = TfidfVectorizer(
         lowercase=True,
         token_pattern=r"\b\w+\b",
@@ -142,24 +134,9 @@ def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: i
         min_df=5,
         max_df=0.8,
         vocabulary=matrix.columns,
-        ngram_range=(1, 1)  # using ngrams will make vectors huuuuuge
+        ngram_range=(1, 1)
     )
     query_vec = np.asarray(vectorizer.fit_transform([query]).todense())
-    # NOTE: just use the same vectorizer from sklearn but pass the vocab, which is the columns of the tfidf dataframe
-    """found_any = False
-    for token in set(raw_tokens): #set to avoid double
-        matched_cols = expand_token(token, vocab)
-        
-        #weight on the found words
-        weight = 1.0 # NOTE: What is the purpose of this? -ivan
-        
-        for col in matched_cols:
-            query_vec[col] = weight
-            found_any = True
-            
-    if not found_any:
-        return []"""
-    print(query_vec)
     #cosinus calculus
     similarities = cosine_similarity(query_vec, matrix)
     scores = pd.Series(similarities[0], index=matrix.index)
@@ -191,8 +168,9 @@ def search_boolean(query: str, matrix: pd.DataFrame):
 #only with a logic request and, or, not
     #cleaning and transition sql to panda
     trans = query.replace(" AND ", " & ").replace(" OR ", " | ").replace(" NOT ", " ~").replace("(", " ( ").replace(")", " ) ")
+    
     q_list = [i for i in trans.split() if i != ""]
-    for i in range(len(q_list)):
+    for i in range(len(q_list)): # Parse the query to apply it over the Dataframe columns
         neg = q_list[i][0] == "~"
         if q_list[i] not in ("&", "|", "(", ")"):
             if neg:
@@ -216,8 +194,6 @@ def search_boolean(query: str, matrix: pd.DataFrame):
     
 ############## MAIN LOGIC ################
 if __name__=="__main__":
-    print(tfidf_matrix.loc[28].index)
-    print(boolean_dict.keys())
     print("--- TEST 2 : Boolean ---")
     q2 = "rpg OR action" 
     ids2 = smart_search_router(q2)
@@ -255,6 +231,6 @@ if __name__=="__main__":
     print("\n" + "="*50 + "\n")
 
     print("--- TEST 4 : Wildcard ---")
-    q2 = "strat*" 
+    q2 = "redempt*" 
     ids2 = smart_search_router(q2)
     print(show_results(ids2))
