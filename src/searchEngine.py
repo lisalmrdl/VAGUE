@@ -4,7 +4,7 @@ import re
 from sklearn.metrics.pairwise import cosine_similarity
 import sys
 import os
-import database as db
+from . import database as db
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 ######## GLOBAL VARIABLES #########
