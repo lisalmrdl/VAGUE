@@ -1,28 +1,37 @@
 from flask import Flask, render_template, request
-#from src.searchEngine import smart_search_router, show_results
 import src.searchEngine as engine
 from src.database import close_db
 from pprint import pprint
 
-
 app = Flask(__name__)
 
 dummy_data = [{"id": 1,
-               "title": "Amazing Game",
-               "year": 2002,
+               "name": "Amazing Game",
+               "date": 2002,
                "publisher": "Publisher",
-               "genres": ["Genre 1"],
+               "genres": "Genre 1",
                "rating": 2.3,
-               "description": "Here be the game description."
+               "desc": "Here be the game description."
                },
               {"id": 2,
-               "title": "Amazing Game 2",
-               "year": 2022,
+               "name": "Amazing Game 2",
+               "date": 2022,
                "publisher": "Publisher",
-               "genres": ["Genre 1", "Genre 2", "Genre 3"],
+               "genres": "Genre 1, Genre 2, Genre 3",
                "rating": 1.9,
-               "description": "Another description."
-              }]
+               "desc": "Another description."
+               }]
+
+
+def get_game_by_id(g_id):
+    return next((g for g in dummy_data if g["id"] == g_id), {"id": 0,
+               "name": "Placeholder",
+               "date": 0000,
+               "publisher": "Publisher",
+               "genres": "Genre 1, Genre 2, Genre 3",
+               "rating": 0.0,
+               "desc": "There is no game to be found here."
+              })
 
 @app.teardown_appcontext
 def teardown_db(exception):
@@ -62,6 +71,7 @@ def results():
 
     df_results = engine.show_results(engine.smart_search_router(query))  # db version
     #results = search_games(query)   # dummy data version
+
     # TODO: change this, I am going to do something very ugly and inefficient
     results = []
     for i in df_results.index:
@@ -72,14 +82,14 @@ def results():
     
     return render_template(
         "search.html",
-        #query=query,
+        query=query,
         results=results
     )    
     
 @app.route("/game/<int:game_id>")
 def game_details(game_id):
     # Find the game by ID
-    game = next((g for g in dummy_data if g["id"] == game_id), None)
+    game = get_game_by_id(game_id)
     if game is None:
         return "Game not found", 404
     return render_template("game_details.html", game=game)

@@ -54,7 +54,7 @@ header {
     
     /* This makes the size of the header banner 'fits' the screen */
     box-sizing: border-box;
-    width: 100vw;
+    width: 100%;
     
     background-color: var(--color-mono-b);
     
@@ -150,21 +150,27 @@ header {
     width: 45%;
 }
 .game-card {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 80px auto 60px;
+    gap: 10px;
     padding: 16px;
     border: 1px solid var(--color-mono-g);
-    /* border-radius: var(--border-rad-s); */
     background-color: var(--color-mono-w);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .game-card:hover {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    /* transform: translateY(-2px); */
     border: 1px solid var(--color-accent-dr);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 .game-thumbnail {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 0px;
     align-self: center;
-    background-color: #2D232E;
-    margin: 0;
+    margin: 0px;
+    padding: 0px 10px 0px 0px;
 }
 .game-title, a.game-title {
     font-size: 18px;
@@ -181,17 +187,42 @@ header {
     padding: 2px 6px 0px 6px;
 }
 .game-rating {
-    font-size: 24px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: center;
+    justify-self: end;
+    padding-right: 5px;
 }
 .metadata-view {
     flex-direction: row;
     border: 1px solid var(--color-mono-g);
-    width: 50%;
+    width: 40%;
     height: 60vh;
     margin-right: 5%;
     padding: 5px 8px 5px 8px;
     justify-content: center;
 }
+
+/* dynamic sizing */
+@media (max-width: 800px) {
+    .game-results {
+        width: 80%;
+    }
+
+    .results {
+        justify-self: center;
+    }
+
+    .metadata-view {
+        display: none;
+    }
+}
+
+.game-results,
+.metadata-view {
+    transition: 0.2s ease, opacity 0.2s ease;
+}
+
 
 footer {
     padding: 0px;
@@ -199,7 +230,7 @@ footer {
     
     /* This makes the size of the banner 'fits' the screen */
     box-sizing: border-box;
-    width: 100vw;
+    width: 100%;
     
     background-color: var(--color-mono-b);
     display: flex;

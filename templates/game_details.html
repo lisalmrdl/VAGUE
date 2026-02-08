@@ -20,10 +20,10 @@
     </header>
   </div>
   <div class="body-container">
-    <h1>{{ game.title }}</h1>
-    <p><strong>Genres:</strong> {{ game.genres | join(", ") }}</p>
+    <h1>{{ game.name }}</h1>
+    <p><strong>Genres:</strong> {{ game.genres.split(",") }}</p>
     <p><strong>Rating:</strong> {{ game.rating }}</p>
-    <p><strong>Description:</strong> {{ game.description }}</p>
+    <p><strong>Description:</strong> {{ game.desc }}</p>
   </div>
   <footer>
     <a href="{{ url_for('about') }}">About</a>
