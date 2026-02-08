@@ -3,6 +3,7 @@ import pandas as pd
 import sqlite3 as sql
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
+from pprint import pprint
 
 ####### GLOBAL VARIABLES ######
 path = Path(os.path.abspath(os.path.dirname(__file__)))
@@ -13,6 +14,15 @@ cur = conn.cursor()
 ####### FUNCTIONS #######
 def deserialize(compressed_data):
     return pickle.loads(compressed_data)
+
+def load_pickle_file(path):
+    return pickle.load(open(path, "rb"))
+
+def load_boolean_vectors() -> dict[str, pd.DataFrame]:
+    return load_pickle_file(path / ".." / "data" / "boolean_vectors")
+
+def load_tfidf_vectors() -> pd.DataFrame:
+    return load_pickle_file(path / ".." / "data" / "tf_idf")
     
 def remake_boolean_matrix(db_cur=cur) -> pd.DataFrame:
     result = db_cur.execute("""
@@ -74,7 +84,7 @@ def get_text_gamedata(limit = 0, as_text = False):
     else:
         return cur.execute(q).fetchall()
     
-def get_all_gamedata(limit = 0, as_text = False):
+def get_all_gamedata(limit = 0, as_text = False, ids=None):
     idgame_join_genres = """SELECT
                               x.id_game,
                               GROUP_CONCAT(gen.name, ', ') AS genres
@@ -99,18 +109,20 @@ def get_all_gamedata(limit = 0, as_text = False):
             gen.genres as genres,
             g.description as description,
             dev.developers as developers,
-            pub.publishers as publishers
-            g.image_url as image_url
-            g.website_url as website_url
-            g.units_sold as units_sold
-            g.rating as rating
-            g.ratings_count as ratings_count
-            g.metacritic as metacritic
+            pub.publishers as publishers,
+            g.image_url as image_url,
+            g.website_url as website_url,
+            g.units_sold as units_sold,
+            g.rating as rating,
+            g.ratings_count as ratings_count,
+            g.metacritic as metacritic,
             g.released as release_date
             FROM game g JOIN ({idgame_join_genres}) gen ON gen.id_game == g.id_game
             JOIN ({idgame_join_developers}) dev ON dev.id_game == g.id_game
             JOIN ({idgame_join_publishers}) pub ON pub.id_game == g.id_game
-            ORDER BY g.metacritic DESC"""
+            """
+    if ids != None:
+        q += f"WHERE g.id_game IN {tuple(map(str, ids))}"
     if limit > 0:
         q += f" LIMIT {limit}"
     if as_text:
@@ -120,8 +132,4 @@ def get_all_gamedata(limit = 0, as_text = False):
 
 
 if __name__=="__main__":
-    data = remake_boolean_matrix()
-    for k, v in data.items():
-        print(k)
-        print(v.head())
-        print(v.index)
+    pprint(get_all_gamedata(limit=10, ids=[28, 28, 2509]))

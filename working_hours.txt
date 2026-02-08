@@ -34,4 +34,9 @@ Lisa : Implementation of the stemming searches while using the Boolean Search as
 Ivan : Re-fetched data to include images and exclude very explicit games. Reworked the SQL database's schema to make it relational (more efficient), now developers/publishers and genres are tables that are related to game's entries. And modified the script for fetching data so that it pushes it directly into the database (no worries, the json is also kept and updated).
 
 02/01 to 05/01 - 6 hours
+
 Ivan : Created a script that processes the boolean vectors and pushes them into the database. Swapped the vectors from numpy matrices to pandas dataframes. Also created a library-like database script that you can import for ease of use. Implemented tf-idf processing to push into the database and tests in the same script to check that everything works as intended.
+
+02/01 to 07/02 - 3 hours
+
+Lisa : Finished the factorisation of the motor engine, re-wrote the boolean and tf-idf + the specific searches in the same code. Gave the code to Ivan for debugging it and adding it in the good place in the github. It is using a part of Ivan's work + re-doing some storage of its own, slow but it's working. Ready for implementation but Waiting for the last kind of research to be implemented to improve it.
