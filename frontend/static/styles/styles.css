@@ -26,13 +26,29 @@ html {
     --color-accent-b: #b4c4d0;
 
     --color-accent-dr: #7d2e2c;
+
+    --color-accent-lr: hsl(2, 68%, 87%);
+
+    --border-rad-s: 5px;
 }
 body {
     margin: 0;  /* This makes the header fill the top of the screen, unsure why */
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+a:link, a:visited {
+    color: var(--color-mono-w);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    color: var(--color-mono-w);
 }
 
 header {
-    padding: 10px 30px;
+    padding: 5px 25px;
     font-family: 'Jersey 25', sans-serif;
     color: var(--color-mono-w);
     
@@ -50,7 +66,7 @@ header {
 }
 
 .logo, .logo:hover {
-    font-size: 2.5rem;
+    font-size: 2rem;
     justify-content: center;
     align-content: center;
     padding: 10px;
@@ -63,19 +79,19 @@ header {
     display: flex;
     gap: 10px; /* Space between the search input and button */
     border: 3px solid transparent; 
-    border-radius: 5px;
+    border-radius: var(--border-rad-s);
 
     /* inside */
     padding: 10px;
-    max-width: 60%;
+    max-width: 70%;
 }
 
 .search-bar #user-query {
     font-family: 'Khand', sans-serif;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: var(--border-rad-s);
+    padding: 0px 0px 0px 10px;
     font-size: 1rem;
-    width: 300px;
+    width: 50vw;
     border: 2px solid var(--color-mono-g);
     background-color: var(--color-mono-l);
     color: var(--color-mono-b);
@@ -85,11 +101,11 @@ header {
 #search-button {
     font-family: 'Khand', sans-serif;
     padding: 5px 15px;
-    font-size: 0.8rem;
+    font-size: 0.8em;
     background-color: var(--color-accent-r);
     color: var(--color-mono-w);
     border: 2px solid var(--color-accent-dr);
-    border-radius: 5px;
+    border-radius: var(--border-rad-s);
     cursor: pointer; /* Cursor turns into a pointer when hovering */
     transition: ease;
 }
@@ -108,14 +124,79 @@ header {
 }
 
 .body-container {
-    padding: 15px;
+    padding: 15px 0px 15px 15px;
+    margin-left: 1%;
+}
+
+.results-header,
+.extra-actions {
+    display: flex;
+    flex-direction: row;
+    padding: 0px 10px 5px 0px;
+}
+.results-count {
+    font-size: 14px;
+}
+.results-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.game-results {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    width: 45%;
+}
+.game-card {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    border: 1px solid var(--color-mono-g);
+    /* border-radius: var(--border-rad-s); */
+    background-color: var(--color-mono-w);
+}
+.game-card:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border: 1px solid var(--color-accent-dr);
+}
+.game-thumbnail {
+    align-self: center;
+    background-color: #2D232E;
+    margin: 0;
+}
+.game-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+.game-publisher {
+    font-size: 14px;
+}
+.genre {
+    font-size: 12px;
+    background-color: var(--color-accent-lr);
+    border-radius: 5px;
+    padding: 2px 6px 0px 6px;
+}
+.game-rating {
+    font-size: 24px;
+}
+.metadata-view {
+    flex-direction: row;
+    border: 1px solid var(--color-mono-g);
+    width: 50%;
+    height: 60vh;
+    margin-right: 5%;
+    padding: 5px 8px 5px 8px;
+    justify-content: center;
 }
 
 footer {
-    padding: 5px;
+    padding: 0px;
     color: var(--color-mono-w);
     
-    /* This makes the size of the header banner 'fits' the screen */
+    /* This makes the size of the banner 'fits' the screen */
     box-sizing: border-box;
     width: 100vw;
     
@@ -123,13 +204,4 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-around;
-}
-
-a:link, a:visited {
-    color: var(--color-mono-w);
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-    color: var(--color-mono-w);
 }
