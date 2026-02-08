@@ -166,9 +166,10 @@ header {
     background-color: #2D232E;
     margin: 0;
 }
-.game-title {
+.game-title, a.game-title {
     font-size: 18px;
     font-weight: 600;
+    color: var(--color-mono-b);
 }
 .game-publisher {
     font-size: 14px;

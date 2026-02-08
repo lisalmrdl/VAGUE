@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>V.A.G.U.E. Search</title>
+    <link rel="stylesheet" href="../static/styles/styles.css">
+</head>
+<body>
+        <!-- Header Container -->
+    <div class="header-container">
+        <header>
+            <a class="logo" href="{{ url_for('home') }}">V.A.G.U.E.</a>
+
+            <form class="search-bar" method="POST" action="/results">
+              <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
+              <input type="submit" id="search-button" value="Search">
+            </form>
+        </header>
+    </div>
+    
+    <div class="body-container">
+        <main>
+            <div class="results">
+              <div class="results-header">
+                {% if query is defined %}
+                    <div class="results-count">{{ results|length }} results for "{{ query }}"</div>
+                    <!-- <div class="extra-actions">
+                        <button class="filter-button">filter</button>
+                        <button class="filter-button">filter</button>
+                    </div> -->
+                    {% else %}
+                    <h2>No query :( Type something.</h2>
+                {% endif %}
+                </div>
+
+                <div class="results-body">
+                    <div class="game-results">
+
+                    {% for game in results %}
+                        <div class="game-card">
+                            <!-- <div class="game-thumbnail">placeholder</div> -->
+                            <div class="game-info">
+                                <a class="game-title" href="{{ url_for('game_details', game_id=game.id) }}">{{ game.title }} ({{ game.year }})</a>
+                                <div class="game-publisher">{{ game.publisher }}</div>
+                                <div class="game-genres">
+                                {% for genre in game.genres %}
+                                <span class="genre">{{ genre }}</span>
+                                {% endfor %}
+                                </div>
+                            </div>
+                            <div class="game-rating">{{ game.rating }}</div>
+                        </div>
+                    {% endfor %}
+                    
+                    </div>
+                    <!-- <div class="metadata-view">
+                        Here be the game description.
+                    </div> -->
+                </div>                
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="https://github.com/lisalmrdl/VAGUE">Github</a>
+        <p>&copy; 2026 V.A.G.U.E. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+

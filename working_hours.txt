@@ -40,3 +40,7 @@ Ivan : Created a script that processes the boolean vectors and pushes them into 
 02/01 to 07/02 - 3 hours
 
 Lisa : Finished the factorisation of the motor engine, re-wrote the boolean and tf-idf + the specific searches in the same code. Gave the code to Ivan for debugging it and adding it in the good place in the github. It is using a part of Ivan's work + re-doing some storage of its own, slow but it's working. Ready for implementation but Waiting for the last kind of research to be implemented to improve it.
+
+02/02 to 02/08 - 6 hours
+
+Suchanya: Design and implementation of frontend features for demo. Includes: home page, search results page, and game specific page.

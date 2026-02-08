@@ -11,12 +11,12 @@
         <!-- Header Container -->
     <div class="header-container">
         <header>
-            <a class="logo" href="search.html">V.A.G.U.E.</a>
+            <a class="logo" href="{{ url_for('home') }}">V.A.G.U.E.</a>
 
-            <div class="search-bar" method>
-            <input type="text" placeholder="Type something" id="user-query">
-            <input type="submit" id="search-button" value="Search">
-            </div>
+            <form class="search-bar" method="POST" action="/results">
+              <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
+              <input type="submit" id="search-button" value="Search">
+            </form>
         </header>
     </div>
     
@@ -25,7 +25,7 @@
     </div>
 
     <footer>
-        <a href="about.html">About</a>
+        <a action="{{ url_for('about') }}">About</a>
         <a href="https://github.com/lisalmrdl/VAGUE">Github</a>
         <p>&copy; 2026 V.A.G.U.E. All rights reserved.</p>
     </footer>
