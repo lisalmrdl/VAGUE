@@ -4,7 +4,7 @@ import re
 from sklearn.metrics.pairwise import cosine_similarity
 import sys
 import os
-from . import database as db
+import src.database as db
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 ######## GLOBAL VARIABLES #########
@@ -30,13 +30,6 @@ boolean_dict = db.load_boolean_vectors()
 boolean_dict["any"] = (tfidf_matrix != 0).astype('int8') # NOTE: Temporary fix, turn everything that is not 0 into one.
 boolean_unified = boolean_dict["any"] # NOTE: careful, this is a pointer
 
-#text for the exact match
-all_data = pd.read_sql(db.get_text_gamedata(as_text=True), db.conn) # NOTE: No need to load de data yet. We can first compute the search. DELETE
-if not all_data.empty:
-    search_text_ref = all_data.set_index('id_game')['description'].fillna("").str.lower()
-else:
-    search_text_ref = pd.Series()
-
 ######## FUNCTIONS #######
 
 def show_results(game_ids):
@@ -50,16 +43,23 @@ def show_results(game_ids):
     #converting in dataframe
     cols = ["id", "name", "genres", "desc", "devs", "pubs", "img", "web", "sold", "rating", "count", "meta", "date"]
     df_res = pd.DataFrame(rows, columns=cols)
-    
+    print(df_res.head())
     #only keeping the "interesting" informations
-    display_cols = ["id", "name", "genres", "date", "desc", "meta", "img", "rating", "devs"]
+    display_cols = ["name", "genres", "date", "desc", "meta", "img", "rating", "devs", "pubs"]
     
     #reorganizing the dataframe per ids
-    df_res = df_res.set_index("id").reindex(game_ids).reset_index()
+    df_res = df_res.set_index("id").reindex(game_ids) # NOTE Why was the index being reset?!
+    print(df_res.head())
     
     return df_res[display_cols]
 
 def smart_search_router(query: str, top_k: int = 10):
+    #text for the exact match
+    all_data = pd.read_sql(db.get_text_gamedata(as_text=True), db.get_db()) # NOTE: No need to load de data yet. We can first compute the search. DELETE
+    if not all_data.empty:
+        search_text_ref = all_data.set_index('id_game')['description'].fillna("").str.lower()
+    else:
+        search_text_ref = pd.Series()
     #boolean detection
     is_logic = bool(re.search(r'\b(AND|OR|NOT)\b', query))
     

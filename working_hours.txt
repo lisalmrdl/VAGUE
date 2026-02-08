@@ -44,3 +44,8 @@ Lisa : Finished the factorisation of the motor engine, re-wrote the boolean and 
 02/02 to 02/08 - 6 hours
 
 Suchanya: Design and implementation of frontend features for demo. Includes: home page, search results page, and game specific page.
+
+
+07/02 and 08/02 - 3 hours
+
+Ivan : Fixed stuff to make all the pieces work together. Changed database system, now a connection to the database is opened every time there's a query (damn Flask). Parsed the dataframe search result into a dict so it can be used, maybe should be changed in the future so the result is a dict. Corrected some fields in the search.html. The engine is workig, hurray!

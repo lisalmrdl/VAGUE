@@ -1,5 +1,9 @@
 from flask import Flask, render_template, request
-# from src.searchEngine import smart_search_router, show_results
+#from src.searchEngine import smart_search_router, show_results
+import src.searchEngine as engine
+from src.database import close_db
+from pprint import pprint
+
 
 app = Flask(__name__)
 
@@ -19,6 +23,10 @@ dummy_data = [{"id": 1,
                "rating": 1.9,
                "description": "Another description."
               }]
+
+@app.teardown_appcontext
+def teardown_db(exception):
+    close_db(exception)
 
 def search_games(query):
     """Temporary query function for testing frontend with dummy data"""
@@ -52,12 +60,19 @@ def results():
             results={}
         )
 
-    #        results = show_results(smart_search_router(query))  # db version
-    results = search_games(query)   # dummy data version
+    df_results = engine.show_results(engine.smart_search_router(query))  # db version
+    #results = search_games(query)   # dummy data version
+    # TODO: change this, I am going to do something very ugly and inefficient
+    results = []
+    for i in df_results.index:
+        print(i)
+        results.append(df_results.loc[i].to_dict())
+        results[-1]["id"] = i
+    pprint(results[0])
     
     return render_template(
         "search.html",
-        query=query,
+        #query=query,
         results=results
     )    
     

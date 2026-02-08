@@ -4,14 +4,24 @@ import sqlite3 as sql
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 from pprint import pprint
+from flask import g
 
 ####### GLOBAL VARIABLES ######
 path = Path(os.path.abspath(os.path.dirname(__file__)))
 db_path = path / ".." / "data" / "games.db"
-conn = sql.connect(db_path)
-cur = conn.cursor()
 
 ####### FUNCTIONS #######
+def get_db():
+    if "db" not in g:
+        g.db = sql.connect(db_path)
+        g.db.row_factory = sql.Row
+    return g.db
+
+def close_db(e=None):
+    db = g.pop("db", None)
+    if db is not None:
+        db.close()
+
 def deserialize(compressed_data):
     return pickle.loads(compressed_data)
 
@@ -23,31 +33,9 @@ def load_boolean_vectors() -> dict[str, pd.DataFrame]:
 
 def load_tfidf_vectors() -> pd.DataFrame:
     return load_pickle_file(path / ".." / "data" / "tf_idf")
-    
-def remake_boolean_matrix(db_cur=cur) -> pd.DataFrame:
-    result = db_cur.execute("""
-        SELECT id_game, embedding FROM boolean_vector
-    """).fetchall()
-    indices = [i[0] for i in result]
-    with ThreadPoolExecutor(max_workers=os.cpu_count()) as exe:
-        values = list(exe.map(deserialize, [i[1] for i in result]))
-    field_boolean_matrix = {}
-    for field in values[0].keys():
-        list_fieldvectors = []
-        for i in range(len(values)):
-            list_fieldvectors.append(values[i][field])
-        field_boolean_matrix[field] = pd.DataFrame(list_fieldvectors, index=indices, dtype=pd.SparseDtype("int8", 0))
-    return field_boolean_matrix
-
-def remake_tfidf_matrix(db_cur=cur) -> pd.DataFrame:
-    result = db_cur.execute("""
-        SELECT id_game, embedding FROM tfidf
-    """).fetchall()
-    indices = [i[0] for i in result]
-    values = [deserialize(i[1]) for i in result]
-    return pd.DataFrame(values, indices, dtype=pd.SparseDtype("float32", 0))
 
 def get_text_gamedata(limit = 0, as_text = False):
+    cur = get_db()
     idgame_join_genres = """SELECT
                               x.id_game,
                               GROUP_CONCAT(gen.name, ', ') AS genres
@@ -85,6 +73,7 @@ def get_text_gamedata(limit = 0, as_text = False):
         return cur.execute(q).fetchall()
     
 def get_all_gamedata(limit = 0, as_text = False, ids=None):
+    cur = get_db()
     idgame_join_genres = """SELECT
                               x.id_game,
                               GROUP_CONCAT(gen.name, ', ') AS genres
