@@ -9,13 +9,13 @@ Searches can be specific, based on the game's genre, its exact name, or simply a
 
 
 ## Motivation
-
 Industry standards, i.e. Steam, offer varying search results depending on different factors such as the day of the inquery.
 VAGUE simplifies navigating through an overwhelming amount of data by streamlining the search process through a fixed database. 
 
 
-
 ## Project Goal
+The goal of this project is to design and implement a prototype search engine that retrieves similar video games using approximate, similarity-based search methods with easily interpretable results.
+
 
 ## Approach and Methods
 
@@ -27,9 +27,9 @@ VAGUE simplifies navigating through an overwhelming amount of data by streamlini
 install flask
 
 ## Team
-Ivan
-Lisa
-Suchanya - front-end
+Ivan Montejo de Garcini
+Lisa Lemardele
+Suchanya Limpakom - front-end
 Ina Goettling - documentation
 
 ## Course Context
