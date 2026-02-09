@@ -13,6 +13,9 @@ search engine organisation, problem discussions
 02/02 - 1,5 hours
 front-end options, filtering for database, problem discussions
 
+09/02 - 1,5 hours
+solving issues with data fetching, visualization for website/search results, optimization of search engine
+
 
 individual work:
 24/01 - 3 hours
