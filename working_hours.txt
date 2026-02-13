@@ -21,7 +21,7 @@ individual work:
 24/01 - 3 hours
 Lisa : Implementation of the boolean search. It works well and can be based on different categories. Each category has their own vector to allow it + a general vector if the category is not described. I still need to implement a correct answer when a query is invalid or when the game is not in the database.
 
-29/01 - 2 hours
+29/01 - 2,5 hours
 Ina: implementation of tf-idf with Lisa's former work of boolean search
 
 26/01 - 2 hours
@@ -51,3 +51,7 @@ Suchanya: Design and implementation of frontend features for demo. Includes: hom
 07/02 and 08/02 - 3 hours
 
 Ivan : Fixed stuff to make all the pieces work together. Changed database system, now a connection to the database is opened every time there's a query (damn Flask). Parsed the dataframe search result into a dict so it can be used, maybe should be changed in the future so the result is a dict. Corrected some fields in the search.html. The engine is workig, hurray!
+
+13/02 - 2,5 hours
+
+Ina : documentation (readme) draft, working through Ivan's and Lisa's uploads
