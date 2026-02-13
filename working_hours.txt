@@ -54,4 +54,4 @@ Ivan : Fixed stuff to make all the pieces work together. Changed database system
 
 13/02 - 2,5 hours
 
-Ina : documentation (readme) draft, working through Ivan's and Lisa's uploads
+Ina : documentation (readme) draft, working through former uploads
