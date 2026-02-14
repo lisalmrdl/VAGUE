@@ -5,6 +5,8 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 from pprint import pprint
 from flask import g
+import matplotlib.pyplot as plt
+import numpy as np
 
 ####### GLOBAL VARIABLES ######
 path = Path(os.path.abspath(os.path.dirname(__file__)))
@@ -21,6 +23,71 @@ def get_db():
         g.db = sql.connect(db_path)
         g.db.row_factory = sql.Row
     return g.db
+
+def plot_ratings(ids: list, output_file=path / ".." / ".temp" / "ranking.png"):
+    """Gets a list of game ids and creates a plot with the rating of the games associated with the ids. The plot is sorted and has 10 evenly spaced bins. The plot is saved as a png image. It's possible to give a path to a file to save the image in such location, look at the arguments.
+
+    Args:
+        ids (list): list containing the games' ids
+        output_file (_type_, optional): Path to the file where the plot image will be saved. Defaults to ./../.temp/ranking.png
+    """
+    data = pd.read_sql(get_all_gamedata(ids=ids, as_text=True), get_db())["rating"]
+    plt.figure()
+    plt.hist(data, bins=np.linspace(0, 5, 11),color="red",edgecolor="white")
+    plt.xticks(range(6))
+    plt.xlabel("Rating")
+    plt.ylabel("Frequency")
+    plt.title("Rating distribution")
+    plt.savefig(output_file)
+    plt.close()
+
+def plot_genre_pie(ids: list, output_file=path / ".." / ".temp" / "genres_pie.png", top_n = 7):
+    """Gets a list of game ids and creates a pie chart with the genres of the games. The plot is sorted and has 10 evenly spaced bins. The chart is saved as a png image. It's possible to give a path to a file to save the image in such location, look at the arguments.
+
+    Args:
+        ids (list): list containing the games' ids
+        output_file (_type_, optional): Path to the file where the plot image will be saved. Defaults to ./../.temp/ranking.png
+        top_n (int): Only the top n will be displayed, the others will be displayed as "Other". Defaults to 7.
+    """
+    data = pd.read_sql(get_genres(ids=ids, as_text=True), get_db())
+    counts = pd.Series(data["count"].iloc[:top_n].tolist(), index=data["genres"][:top_n])
+    counts["Other"] = sum(data["count"][top_n:])
+    del data
+    cmap = plt.cm.hsv
+    colors = cmap(np.linspace(0, 1, 5))
+    plt.figure()
+    plt.pie(
+        counts,
+        labels=counts.index,
+        autopct="%1.1f%%",
+        startangle=90,
+        counterclock=False,
+        wedgeprops={"edgecolor": "black"},
+        colors=colors
+    )
+    plt.title("Genre distribution")
+    plt.axis("equal")
+    plt.savefig(output_file)
+    plt.close()
+
+def get_genres(ids, as_text=False):
+    cur = get_db()
+    query = """SELECT
+                    gen.name AS genres,
+                    COUNT(x.id_game) as count
+                FROM has_genre x
+                JOIN genre gen ON gen.id_genre = x.id_genre
+            """
+    if len(ids) > 1:
+        query+=f"WHERE x.id_game IN {tuple(map(str, ids))}"
+    else:
+        query+=f"WHERE x.id_game == {tuple(map(str, ids))[0]}"
+    query+="\nGROUP BY gen.name"
+    query+="\nORDER BY count DESC"
+    if as_text:
+        return query
+    else:
+        return cur.execute(query).fetchall()
 
 def close_db(e=None):
     """Close the connection with the database
@@ -114,7 +181,7 @@ def get_text_gamedata(limit = 0, as_text = False):
     else:
         return cur.execute(q).fetchall()
     
-def get_all_gamedata(limit = 0, as_text = False, ids=None):
+def get_all_gamedata(limit = 0, as_text = False, ids=None, cur = None):
     """Fetch all useful data from the games from the SQL database.
 
     Args:
@@ -125,7 +192,8 @@ def get_all_gamedata(limit = 0, as_text = False, ids=None):
     Returns:
         list[str] or str: Results of the query or the query string.
     """
-    cur = get_db()
+    if cur == None:
+        cur = get_db()
     idgame_join_genres = """SELECT
                               x.id_game,
                               GROUP_CONCAT(gen.name, ', ') AS genres
@@ -163,7 +231,10 @@ def get_all_gamedata(limit = 0, as_text = False, ids=None):
             JOIN ({idgame_join_publishers}) pub ON pub.id_game == g.id_game
             """
     if ids != None:
-        q += f"WHERE g.id_game IN {tuple(map(str, ids))}"
+        if len(ids) > 1:
+            q += f"WHERE g.id_game IN {tuple(map(str, ids))}"
+        else:
+            q += f"WHERE g.id_game == {str(ids[0])}"
     if limit > 0:
         q += f" LIMIT {limit}"
     if as_text:
@@ -173,4 +244,4 @@ def get_all_gamedata(limit = 0, as_text = False, ids=None):
 
 
 if __name__=="__main__":
-    pprint(get_all_gamedata(limit=10, ids=[28, 28, 2509]))
+    pass
