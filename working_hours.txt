@@ -18,6 +18,7 @@ solving issues with data fetching, visualization for website/search results, opt
 
 
 individual work:
+
 24/01 - 3 hours
 Lisa : Implementation of the boolean search. It works well and can be based on different categories. Each category has their own vector to allow it + a general vector if the category is not described. I still need to implement a correct answer when a query is invalid or when the game is not in the database.
 
@@ -37,25 +38,23 @@ Lisa : Implementation of the stemming searches while using the Boolean Search as
 Ivan : Re-fetched data to include images and exclude very explicit games. Reworked the SQL database's schema to make it relational (more efficient), now developers/publishers and genres are tables that are related to game's entries. And modified the script for fetching data so that it pushes it directly into the database (no worries, the json is also kept and updated).
 
 02/01 to 05/01 - 6 hours
-
 Ivan : Created a script that processes the boolean vectors and pushes them into the database. Swapped the vectors from numpy matrices to pandas dataframes. Also created a library-like database script that you can import for ease of use. Implemented tf-idf processing to push into the database and tests in the same script to check that everything works as intended.
 
 02/01 to 07/02 - 3 hours
-
 Lisa : Finished the factorisation of the motor engine, re-wrote the boolean and tf-idf + the specific searches in the same code. Gave the code to Ivan for debugging it and adding it in the good place in the github. It is using a part of Ivan's work + re-doing some storage of its own, slow but it's working. Ready for implementation but Waiting for the last kind of research to be implemented to improve it.
 
 02/02 to 08/02 - 6.5 hours
-
 Suchanya: Design and implementation of frontend features for demo. Includes: home page, search results page, and game detail pages.
 
 07/02 and 08/02 - 3 hours
-
 Ivan : Fixed stuff to make all the pieces work together. Changed database system, now a connection to the database is opened every time there's a query (damn Flask). Parsed the dataframe search result into a dict so it can be used, maybe should be changed in the future so the result is a dict. Corrected some fields in the search.html. The engine is workig, hurray!
 
 13/02 - 2,5 hours
-
 Ina : documentation (readme) draft, working through former uploads
 
 14/02 - 1,5 hours
-
 Ivan : Created functions to generate the pie chart and the rating histogram by passing ids. The plots are generated and saved as images in the .temp folder.
+
+15/02 - 1,5 hours
+Lisa : Infinite scrolling for tf_idf (take time to load, need to talk about a result limit)
+Modyfied the template of the webpage to show the details of the game, added the picture + re-organized the desciption with the different markdowns.
