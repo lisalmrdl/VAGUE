@@ -58,3 +58,6 @@ Ivan : Created functions to generate the pie chart and the rating histogram by p
 15/02 - 1,5 hours
 Lisa : Infinite scrolling for tf_idf (take time to load, need to talk about a result limit)
 Modyfied the template of the webpage to show the details of the game, added the picture + re-organized the desciption with the different markdowns.
+
+15/02 - 2 hours
+Suchanya: new home page, scroll view on search results, html space to display plots. Working on getting the plots to display, but Flask is being Flask again.
