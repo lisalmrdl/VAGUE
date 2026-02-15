@@ -237,3 +237,37 @@ footer {
     align-items: center;
     justify-content: space-around;
 }
+
+.game-detail-image {
+    margin: 25px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.game-cover {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.body-container h1 {
+    margin-bottom: 10px;
+}
+
+.body-container p {
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.game-description h1, 
+.game-description h2, 
+.game-description h3 {
+    margin: 15px 0 8px 0;
+    font-weight: bold;
+}
+
+.game-description p {
+    margin-bottom: 10px;
+}

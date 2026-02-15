@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import src.searchEngine as engine
 from src.database import close_db
 from pprint import pprint
+import markdown
 
 app = Flask(__name__)
 
@@ -88,10 +89,16 @@ def results():
     
 @app.route("/game/<int:game_id>")
 def game_details(game_id):
-    # Find the game by ID
-    game = get_game_by_id(game_id)
-    if game is None:
+    df_game = engine.show_results([game_id])
+
+    if df_game.empty:
         return "Game not found", 404
+
+    game = df_game.iloc[0].to_dict()
+    game["id"] = game_id
+
+    game["desc"] = markdown.markdown(game["desc"])
+
     return render_template("game_details.html", game=game)
 
 # About page

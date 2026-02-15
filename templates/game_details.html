@@ -21,9 +21,24 @@
   </div>
   <div class="body-container">
     <h1>{{ game.name }}</h1>
+    {% if game.img %}
+    <div class="game-detail-image">
+      <img src="{{ game.img }}" 
+         alt="{{ game.name }} cover" 
+         class="game-cover"
+         onerror="this.src='/static/img/placeholder.jpg';">
+    </div>
+    {% endif %}
     <p><strong>Genres:</strong> {{ game.genres.split(",") }}</p>
     <p><strong>Rating:</strong> {{ game.rating }}</p>
-    <p><strong>Description:</strong> {{ game.desc }}</p>
+    <p><strong>Release date:</strong> {{ game.date }}</p>
+    <p><strong>Developers:</strong> {{ game.devs }}</p>
+    <p><strong>Publishers:</strong> {{ game.pubs }}</p>
+
+    <div class="game-description">
+        {{ game.desc | safe }}
+    </div>
+
   </div>
   <footer>
     <a href="{{ url_for('about') }}">About</a>

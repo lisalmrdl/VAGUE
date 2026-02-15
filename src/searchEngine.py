@@ -53,7 +53,7 @@ def show_results(game_ids):
     
     return df_res[display_cols]
 
-def smart_search_router(query: str, top_k: int = 10):
+def smart_search_router(query: str, top_k: int | None = None):
     #text for the exact match
     all_data = pd.read_sql(db.get_text_gamedata(as_text=True), db.get_db()) # NOTE: No need to load de data yet. We can first compute the search. DELETE
     if not all_data.empty:
@@ -73,11 +73,11 @@ def smart_search_router(query: str, top_k: int = 10):
         if results is None or len(results) == 0:
             print(f"Nothing found, switching up to TF-IDF")
             mode = "TF-IDF (Fallback)"
-            results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k)
+            results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k=None)
             
     else:
         mode = "TF-IDF"
-        results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k)
+        results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k=None)
     
     print(f"Mode : {mode} | Résultats : {len(results)}")
     return results
@@ -116,7 +116,7 @@ def expand_token(token: str, vocab: pd.Series):
     return []
 
 #TF-IDF (by default)
-def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: int = 10):
+def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: int | None = None):
     #parsing
     phrases, raw_tokens = parse_query(query)
     
@@ -141,8 +141,14 @@ def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: i
     similarities = cosine_similarity(query_vec, matrix)
     scores = pd.Series(similarities[0], index=matrix.index)
     
-    #large pool to be able to filter it later
-    candidates = scores.sort_values(ascending=False).head(top_k * 5)
+    #main changes here to delete the 10 limit
+    sorted_scores = scores.sort_values(ascending=False)
+
+    if top_k is None:
+        candidates = sorted_scores
+    else:
+        candidates = sorted_scores.head(top_k * 5)
+
     
     #calling the exact words seen above
     if phrases and not candidates.empty:
@@ -158,9 +164,17 @@ def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: i
         final_ids = candidate_texts.index.tolist()
         
         #sending back the candidates on order of the filter
-        return candidates.loc[final_ids].head(top_k).index.tolist()
+        if top_k is None:
+            return candidates.loc[final_ids].index.tolist()
+        else:
+            return candidates.loc[final_ids].head(top_k).index.tolist()
 
-    return candidates.head(top_k).index.tolist()
+
+    if top_k is None:
+        return candidates.index.tolist()
+    else:
+        return candidates.head(top_k).index.tolist()
+
 
 
 #BOOLEAN (Strict logic)
