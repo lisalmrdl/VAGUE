@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>V.A.G.U.E. Landing</title>
+    <link rel="stylesheet" href="../static/styles/styles-home.css">
+</head>
+<body>
+        <!-- Header Container -->
+    <div class="header-container">
+        <header>
+            <a class="logo" href="{{ url_for('home') }}">V.A.G.U.E.</a>
+            <p class="subtitle">
+            <span class="accent">V</span>ideo-game
+            <span class="accent">A</span>pproximate
+            <span class="accent">G</span>ame-finding
+            <span class="accent">U</span>tility
+            <span class="accent">E</span>ngine
+            </p>
+        </header>
+
+        <div class="search-container">
+            <div class="search-card">
+                <form class="search-bar" method="GET" action="/results">
+                    <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
+                    <input type="submit" id="search-button" value="Search">
+                </form>
+            </div>
+            <div class="search-description">
+              <p>A <b class="accent">VAGUE</b>ly accurate search engine for games! Search our modest database of games using boolean, tf-idf, or a <i class="fade">secret third search</i>. Discover new games or look up old favorites.</p>
+              <p><b>HOW TO</b></p>
+              <p>Type any query in the search bar. Our smart search engine will determine which search function to use. Trigger boolean search by adding operators to your query:<p>
+                <ul>
+                  <li><code>AND</code>: Results much match both search terms</li>
+                  <li><code>OR</code>: Results may match either search term</li>
+                  <li><code>""</code>: Exact phrase match</li>
+                  <li><code>*</code>: Wildcard, matches any number of characters (including zero)</li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="https://github.com/lisalmrdl/VAGUE">Github</a>
+        <p>&copy; 2026 V.A.G.U.E. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+

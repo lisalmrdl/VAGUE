@@ -148,6 +148,12 @@ header {
     flex-direction: column;
     gap: 0px;
     width: 45%;
+    height: 85vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-gutter: 2px;
+    scrollbar-base-color: var(--color-accent-r);
+    transition: transform 2s ease;
 }
 .game-card {
     display: grid;
@@ -204,7 +210,7 @@ header {
 }
 
 /* dynamic sizing */
-@media (max-width: 800px) {
+@media (max-width: 700px) {
     .game-results {
         width: 80%;
     }

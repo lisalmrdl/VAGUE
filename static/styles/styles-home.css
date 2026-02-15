@@ -1,0 +1,168 @@
+@font-face {
+    font-family: 'Jersey 25';
+    src: url('../fonts/Jersey_25/Jersey25-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Khand';
+    src: url('../fonts/Khand/Khand-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    font-family: 'Khand', sans-serif;
+    height: 100%; /* required for flex approach */
+
+    --color-mono-b: #2D232E;
+    --color-mono-g: #ccc;
+    --color-mono-l: #f4f4f4;
+    --color-mono-w: #ffffff;
+
+    --color-accent-r: #b0413e;
+    --color-accent-g: #c2d0cb;
+    --color-accent-y: #f6ffe7;
+    --color-accent-b: #b4c4d0;
+
+    --color-accent-dr: #7d2e2c;
+
+    --color-accent-lr: hsl(2, 68%, 87%);
+
+    --border-rad-s: 5px;
+}
+body {
+    margin: 0;  /* This makes the header fill the top of the screen, unsure why */
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+a:link, a:visited {
+    color: var(--color-mono-w);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    color: var(--color-mono-w);
+}
+
+header {
+    padding: 15px 25px;
+    font-family: 'Jersey 25', sans-serif;
+    color: var(--color-mono-w);
+    
+    /* This makes the size of the header banner 'fit' the screen */
+    box-sizing: border-box;
+    width: 100%;
+    height: 40vh;
+    background-color: var(--color-mono-b);
+    
+    /* Flex makes the items (LOGO    search bar) display inline */
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.logo, .logo:hover {
+    font-size: 6rem;
+    padding: 10px;
+    /* border: 2px solid var(--color-mono-w); */
+    text-decoration: none;
+}
+.subtitle {
+    font-size: 1.7rem;
+}
+.accent {
+    color: var(--color-accent-r);
+}
+.fade {
+    color: var(--color-mono-g);
+}
+.search-container {
+    /*  background: var(--color-mono-b); */
+    min-height: 50vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    flex: 1;
+    font-size: 18px;
+}
+.search-card {
+    background: var(--color-mono-w);
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 24px 28px;
+    min-width: 70%;
+    /* box-shadow: 0 12px 30px rgba(0,0,0,0.25); */
+    justify-content: center;
+    align-self: center;
+}
+.search-description {
+    margin: 0px 15%;
+    padding: 15px 20px 40px 20px;
+    font-size: 1em;
+
+    color: var(--color-mono-b);
+
+    /* background: var(--color-mono-b); */
+}
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+}
+.search-bar #user-query {
+    font-family: 'Khand', sans-serif;
+    padding: 10px;
+    width: 70%;
+    border-radius: var(--border-rad-s);
+    font-size: 1em;
+    border: 2px solid var(--color-mono-g);
+    background-color: var(--color-mono-l);
+    color: var(--color-mono-b);
+}
+
+#search-button {
+    font-family: 'Khand', sans-serif;
+    width: 80px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: var(--color-accent-r);
+    color: var(--color-mono-w);
+    border: 2px solid var(--color-accent-dr);
+    border-radius: var(--border-rad-s);
+    cursor: pointer;
+    transition: ease;
+}
+
+/* Hover effect for the button */
+#search-button:hover {
+    background-color: var(--color-accent-dr);
+    border: 2px solid var(--color-accent-dr);
+    color: var(--color-mono-g);
+}
+
+#user-query:focus {
+    border-color: var(--color-accent-r);
+    outline: none;
+}
+
+footer {
+    padding: 0px;
+    color: var(--color-mono-w);
+    /* This makes the size of the banner 'fit' the screen */
+    box-sizing: border-box;
+    width: 100%;
+    
+    background: var(--color-accent-r);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

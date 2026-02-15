@@ -6,51 +6,47 @@ import markdown
 
 app = Flask(__name__)
 
-dummy_data = [{"id": 1,
-               "name": "Amazing Game",
-               "date": 2002,
-               "publisher": "Publisher",
-               "genres": "Genre 1",
-               "rating": 2.3,
-               "desc": "Here be the game description."
-               },
-              {"id": 2,
-               "name": "Amazing Game 2",
-               "date": 2022,
-               "publisher": "Publisher",
-               "genres": "Genre 1, Genre 2, Genre 3",
-               "rating": 1.9,
-               "desc": "Another description."
-               }]
+# dummy_data = [{"id": 1,
+#                "name": "Amazing Game",
+#                "date": 2002,
+#                "publisher": "Publisher",
+#                "genres": "Genre 1",
+#                "rating": 2.3,
+#                "desc": "Here be the game description."
+#                },
+#               {"id": 2,
+#                "name": "Amazing Game 2",
+#                "date": 2022,
+#                "publisher": "Publisher",
+#                "genres": "Genre 1, Genre 2, Genre 3",
+#                "rating": 1.9,
+#                "desc": "Another description."
+#                }]
 
 
-def get_game_by_id(g_id):
-    return next((g for g in dummy_data if g["id"] == g_id), {"id": 0,
-               "name": "Placeholder",
-               "date": 0000,
-               "publisher": "Publisher",
-               "genres": "Genre 1, Genre 2, Genre 3",
-               "rating": 0.0,
-               "desc": "There is no game to be found here."
-              })
+# def get_game_by_id(g_id):
+#     return next((g for g in dummy_data if g["id"] == g_id), {"id": 0,
+#                "name": "Placeholder",
+#                "date": 0000,
+#                "publisher": "Publisher",
+#                "genres": "Genre 1, Genre 2, Genre 3",
+#                "rating": 0.0,
+#                "desc": "There is no game to be found here."
+#               })
 
 @app.teardown_appcontext
 def teardown_db(exception):
     close_db(exception)
 
-def search_games(query):
-    """Temporary query function for testing frontend with dummy data"""
-    return [game for game in dummy_data if query.lower() in game["title"].lower()]
+# def search_games(query):
+#     """Temporary query function for testing frontend with dummy data"""
+#     return [game for game in dummy_data if query.lower() in game["title"].lower()]
     
 # Home Page
 @app.route('/')
 def home():
     """Homepage. Default search is ranked by top ratings."""
-    return render_template(
-        "search.html",
-        query="Top Games (dummy data)",
-        results=sorted(dummy_data, key=lambda g: g["rating"], reverse=True)[:10]
-    )
+    return render_template("home.html")
 
 @app.route('/results', methods=['GET', 'POST'])
 def results():
