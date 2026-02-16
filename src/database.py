@@ -181,6 +181,34 @@ def get_text_gamedata(limit = 0, as_text = False):
     else:
         return cur.execute(q).fetchall()
     
+def get_similarity_weigths(game_ids, normalized=True):
+    """
+    Fetch the appropriate columns from the database from which the similarity is weighted (the search should take into account the similarity together with the popularity of a game for the search results). For now the similarity should be weighted using the rating and the amount of ratings, this function returns a dataframe containing these as columns. The dataframe is normalized by default (using the max value as a reference for the division).
+
+    Args:
+        game_ids (list[int]): ids from the games whose ratings and rating count should be retrieved.
+        normalized (bool): Should the values be normalized by max value (True) or should the values be returned as they are (False)?. Defaults to True.
+
+    Returns:
+        pd.DataFrame: Dataframe indexed with the games' ids containing the rating and the ratings_count as the columns.
+    """
+    cur = get_db()
+    q = f"""SELECT
+            id_game,
+            ratings_count,
+            rating
+            FROM game
+            """
+    if len(game_ids) > 1:
+        q+=f"WHERE id_game IN {tuple(map(str, game_ids))}"
+    else:
+        q+=f"WHERE id_game == {tuple(map(str, game_ids))[0]}"
+    result = pd.read_sql(q, cur, index_col="id_game")
+    if normalized:
+        result["ratings_count"] = result["ratings_count"]/result["ratings_count"].max()
+        result["rating"] = result["rating"]/result["rating"].max()
+    return result
+    
 def get_all_gamedata(limit = 0, as_text = False, ids=None, cur = None):
     """Fetch all useful data from the games from the SQL database.
 

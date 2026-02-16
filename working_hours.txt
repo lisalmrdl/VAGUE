@@ -65,3 +65,5 @@ Modyfied the template of the webpage to show the details of the game, added the 
 15/02 - 2 hours
 Suchanya: new home page, scroll view on search results, html space to display plots. Working on getting the plots to display, but Flask is being Flask again.
 
+16/02 - 0.5 hours
+Ivan: Created function to get the normalized weights for the similarity search sorting (the similarity should be weighted as 0.7 similarity score and 0.15 for each of rating and ratings count).
