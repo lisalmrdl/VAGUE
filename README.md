@@ -5,10 +5,11 @@ Group repository for Video-game Approximate Game-finding Utility Engine (V.A.G.U
 This project is a search engine focused on video games that allows users to search our database of 10,000 games. 
 Searches can be specific or related to a particular theme. <br>
 Possible queries are:
-	- game title
-	- genre
-	- keywords
-	- approximate or similarity-based queries
+
+- game title
+- genre
+- keywords
+- approximate or similarity-based queries
 
 ## Motivation
 Industry standards, i.e. Steam, offer varying search results depending on different factors such as the day of the inquery.
@@ -52,22 +53,22 @@ VAGUE/
 
 ## Setup
 **clone repository** <br>
-	git clone https://github.com/lisalmrdl/VAGUE.git
+	git clone https://github.com/lisalmrdl/VAGUE.git <br>
 **change directory** <br>
-	cd VAGUE
+	cd VAGUE <br>
 **create virtual enviroment** <br>
-	python3 -m venv venv
+	python3 -m venv venv <br>
 **activate virtual enviroment** <br>
-	source venv/bin/activate
+	source venv/bin/activate <br>
 **install dependencies** <br>
-	pip install flask pandas numpy scikit-learn
+	pip install flask pandas numpy scikit-learn <br>
 
 
 ## Usage
 **Start the application:** <br>
-	python app.py
+	python app.py <br>
 **open in your browser:** <br>
-	#website?
+	#website? <br>
 
 GIF
 
