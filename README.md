@@ -3,12 +3,13 @@ Group repository for Video-game Approximate Game-finding Utility Engine (V.A.G.U
 
 ## Overview
 This project is a search engine focused on video games that allows users to search our database of 10,000 games. 
-Searches can be specific or related to a particular theme.
+Searches can be specific or related to a particular theme. <br>
 Possible queries are:
-	- game title
-	- genre
-	- keywords
-	- approximate or similarity-based queries
+
+- game title
+- genre
+- keywords
+- approximate or similarity-based queries
 
 ## Motivation
 Industry standards, i.e. Steam, offer varying search results depending on different factors such as the day of the inquery.
@@ -21,12 +22,13 @@ It connects backend IR logic with a web-based frontend.
 ## Approach and Methods
 The search engine combines Boolean search and TF-IDF-based ranking in a simple modular pipeline.
 All queries are first checked by smart_search_router().
-Tehank, if a query contains logical operators like AND, OR, or NOT, it is handled using Boolean retrieval. Otherwise, the system applies TF-IDF ranking with cosine similarity. 
+Then, if a query contains logical operators like AND, OR, or NOT, it is handled using Boolean retrieval. Otherwise, the system applies TF-IDF ranking with cosine similarity. 
 If a Boolean query does not return results, the system automatically falls back to TF-IDF search.
 Quoted phrases are treated as exact matches within the ranked results. 
 The system also supports optional stemming and basic wildcard queries using *.
 
 ## Repository Structure
+```
 VAGUE/
 │
 ├── app.py
@@ -47,32 +49,35 @@ VAGUE/
 │
 ├── templates/
 ├── static/
+```
 
 ## Setup
-clone repository
-	git clone https://github.com/lisalmrdl/VAGUE.git
-change directory
-	cd VAGUE
-create virtual enviroment
-	python3 -m venv venv
-activate virtual enviroment
-	source venv/bin/activate
-install dependencies
-	pip install flask pandas numpy scikit-learn
+**clone repository** <br>
+	git clone https://github.com/lisalmrdl/VAGUE.git <br>
+**change directory** <br>
+	cd VAGUE <br>
+**create virtual enviroment** <br>
+	python3 -m venv venv <br>
+**activate virtual enviroment** <br>
+	source venv/bin/activate <br>
+**install dependencies** <br>
+	pip install flask pandas numpy scikit-learn <br>
 
 
 ## Usage
-Start the application:
-	python app.py
-open in your browser:
-	#website?
+**Start the application:** <br>
+	python app.py <br>
+**open in your browser:** <br>
+	#website? <br>
+
+GIF
 
 
 ## Team
-Ivan Montejo de Garcini
-Lisa Lemardele
-Suchanya Limpakom
-Ina Goettling
+Ivan Montejo de Garcini <br>
+Lisa Lemardele <br>
+Suchanya Limpakom <br>
+Ina Goettling <br>
 
 ## Course Context
 This project was developed as part of the Building NLP Applications course at the University of Helsinki.

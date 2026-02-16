@@ -16,6 +16,9 @@ front-end options, filtering for database, problem discussions
 09/02 - 1,5 hours
 solving issues with data fetching, visualization for website/search results, optimization of search engine
 
+16/02 -  1,5 hours
+error search (and solving), discussion on weighting and testing, optimizing parts in the code
+
 
 individual work:
 
@@ -61,3 +64,4 @@ Modyfied the template of the webpage to show the details of the game, added the 
 
 15/02 - 2 hours
 Suchanya: new home page, scroll view on search results, html space to display plots. Working on getting the plots to display, but Flask is being Flask again.
+
