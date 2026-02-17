@@ -75,7 +75,7 @@ GIF
 
 ## Team
 Ivan Montejo de Garcini <br>
-Lisa Lemardele <br>
+Lisa Lemardelé <br>
 Suchanya Limpakom <br>
 Ina Goettling <br>
 

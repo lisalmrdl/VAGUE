@@ -53,7 +53,7 @@ def show_results(game_ids):
     
     return df_res[display_cols]
 
-def smart_search_router(query: str, top_k: int | None = None):
+def smart_search_router(query: str, top_k: int = 100):
     #text for the exact match
     all_data = pd.read_sql(db.get_text_gamedata(as_text=True), db.get_db()) # NOTE: No need to load de data yet. We can first compute the search. DELETE
     if not all_data.empty:
@@ -68,16 +68,16 @@ def smart_search_router(query: str, top_k: int | None = None):
 
     if is_logic:
         mode = "BOOLEAN (Strict)"
-        results = search_boolean(query, boolean_unified)
+        results = search_boolean(query, boolean_unified, top_k)
         
         if results is None or len(results) == 0:
             print(f"Nothing found, switching up to TF-IDF")
             mode = "TF-IDF (Fallback)"
-            results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k=None)
+            results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k)
             
     else:
         mode = "TF-IDF"
-        results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k=None)
+        results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k)
     
     print(f"Mode : {mode} | Résultats : {len(results)}")
     return results
@@ -116,7 +116,7 @@ def expand_token(token: str, vocab: pd.Series):
     return []
 
 #TF-IDF (by default)
-def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: int | None = None):
+def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: int = 100):
     #parsing
     phrases, raw_tokens = parse_query(query)
     
@@ -178,7 +178,7 @@ def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: i
 
 
 #BOOLEAN (Strict logic)
-def search_boolean(query: str, matrix: pd.DataFrame):
+def search_boolean(query: str, matrix: pd.DataFrame, top_k: int = 100):
 #only with a logic request and, or, not
     #cleaning and transition sql to panda
     trans = query.replace(" AND ", " & ").replace(" OR ", " | ").replace(" NOT ", " ~").replace("(", " ( ").replace(")", " ) ")
@@ -199,7 +199,10 @@ def search_boolean(query: str, matrix: pd.DataFrame):
         mask = eval(trans)
         #True/False
         results = mask[mask==1].index.tolist()
-        return results
+        if top_k is None:
+            return results()
+        else:
+            return results(top_k).index.tolist()
         
     except Exception as e:
         #if the word doesn't exist
