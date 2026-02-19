@@ -39,5 +39,13 @@ pprint(cur.execute("""
                     LIMIT 10
                   """).fetchall())
 
+print("NEW QUERY")
+pprint(cur.execute("""
+                    SELECT g.id_game, g.name 
+                    FROM game g
+                    WHERE g.name like "Dark Souls%"
+                    LIMIT 10
+                  """).fetchall())
+
 
 conn.close()
