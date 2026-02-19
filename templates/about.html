@@ -13,7 +13,7 @@
         <header>
             <a class="logo" href="{{ url_for('home') }}">V.A.G.U.E.</a>
 
-            <form class="search-bar" method="POST" action="/results">
+            <form class="search-bar" method="GET" action="/results">
               <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
               <input type="submit" id="search-button" value="Search">
             </form>

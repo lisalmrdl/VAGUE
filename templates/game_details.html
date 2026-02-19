@@ -13,7 +13,7 @@
     <header>
       <a class="logo" href="{{ url_for('home') }}">V.A.G.U.E.</a>
 
-      <form class="search-bar" method="POST" action="/results">
+      <form class="search-bar" method="GET" action="/results">
         <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
         <input type="submit" id="search-button" value="Search">
       </form>
@@ -29,14 +29,16 @@
          onerror="this.src='/static/img/placeholder.jpg';">
     </div>
     {% endif %}
-    <p><strong>Genres:</strong> {{ game.genres.split(",") }}</p>
-    <p><strong>Rating:</strong> {{ game.rating }}</p>
-    <p><strong>Release date:</strong> {{ game.date }}</p>
-    <p><strong>Developers:</strong> {{ game.devs }}</p>
-    <p><strong>Publishers:</strong> {{ game.pubs }}</p>
-
-    <div class="game-description">
+    <div class="game-details">
+      <p><strong>Genres:</strong> {{ game.genres.split(",") }}</p>
+      <p><strong>Rating:</strong> {{ game.rating }}</p>
+      <p><strong>Release date:</strong> {{ game.date }}</p>
+      <p><strong>Developers:</strong> {{ game.devs }}</p>
+      <p><strong>Publishers:</strong> {{ game.pubs }}</p>
+      
+      <div class="game-description">
         {{ game.desc | safe }}
+      </div>
     </div>
 
   </div>

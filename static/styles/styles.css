@@ -154,6 +154,7 @@ header {
     scrollbar-gutter: 2px;
     scrollbar-base-color: var(--color-accent-r);
     transition: transform 2s ease;
+    flex: 2;
 }
 .game-card {
     display: grid;
@@ -201,18 +202,21 @@ header {
 }
 .metadata-view {
     flex-direction: row;
-    border: 1px solid var(--color-mono-g);
+    flex: 1;
     width: 40%;
-    height: 60vh;
-    margin-right: 5%;
-    padding: 5px 8px 5px 8px;
+    height: 60%;
+    margin-left: 5%;
+    justify-content: center;
+}
+.metadata-view img {
+    max-width: 85%;
     justify-content: center;
 }
 
 /* dynamic sizing */
-@media (max-width: 700px) {
+@media (max-width: 750px) {
     .game-results {
-        width: 80%;
+        max-width: 95%;
     }
 
     .results {
@@ -222,13 +226,8 @@ header {
     .metadata-view {
         display: none;
     }
-}
 
-.game-results,
-.metadata-view {
-    transition: 0.2s ease, opacity 0.2s ease;
 }
-
 
 footer {
     padding: 0px;
@@ -243,6 +242,7 @@ footer {
     align-items: center;
     justify-content: space-around;
 }
+
 
 .game-detail-image {
     margin: 25px 0;

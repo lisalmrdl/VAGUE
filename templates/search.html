@@ -13,7 +13,7 @@
         <header>
             <a class="logo" href="{{ url_for('home') }}">V.A.G.U.E.</a>
 
-            <form class="search-bar" method="POST" action="/results">
+            <form class="search-bar" method="GET" action="/results">
               <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
               <input type="submit" id="search-button" value="Search">
             </form>
@@ -40,7 +40,7 @@
 
                     {% for game in results %}
                     <div class="game-card">
-                      <img src="{{ game.img }}" alt="{{ game.title }} cover" class="game-thumbnail" onerror="/static/img/placeholder.jpg">
+                      <img src="{{ game.img }}" alt="{{ game.title }} cover" class="game-thumbnail" onerror="/static/img/placeholder.png">
                       <div class="game-info">
                         <a class="game-title" href="{{ url_for('game_details', game_id=game.id) }}">{{ game.name }} ({{ game.date }})</a>
                         <div class="game-publisher">{{ game.devs }}</div>
@@ -56,7 +56,8 @@
                     
                     </div>
                     <div class="metadata-view">
-                      The plots would go here.
+                      <img src="/static/plots/ranking.png" alt="there should be a plot here :(">
+                      <img src="/static/plots/genres_pie.png" alt="there should be a plot here :(">
                     </div>
                 </div>                
             </div>
