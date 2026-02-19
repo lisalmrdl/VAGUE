@@ -7,6 +7,7 @@ from pprint import pprint
 from flask import g
 import matplotlib.pyplot as plt
 import numpy as np
+plt.style.use('ggplot')
 
 ####### GLOBAL VARIABLES ######
 path = Path(os.path.abspath(os.path.dirname(__file__)))
