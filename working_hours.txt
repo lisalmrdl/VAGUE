@@ -70,3 +70,6 @@ Ivan: Created function to get the normalized weights for the similarity search s
 
 19/02 - 1.5 hours
 Ivan: Fixed a bug that was causing the vector to be loaded twice (not really a bug but a feature of flask). Changed plots' styling a bit. Created and serialized neural embeddings.
+
+19/02 - 2 hours
+Suchanya: fixed some styling and html, plots are now displayed upon search. also fixed bug where site would crash if a search returned no results.
