@@ -37,7 +37,9 @@ body {
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
-
+.accent {
+    color: var(--color-accent-r);
+}
 a:link, a:visited {
     color: var(--color-mono-w);
     text-decoration: none;
@@ -207,10 +209,17 @@ header {
     height: 60%;
     margin-left: 5%;
     justify-content: center;
+    margin-right: 5%;
 }
 .metadata-view img {
     max-width: 85%;
     justify-content: center;
+}
+
+.help {
+    border-radius: 13px;
+    border: 1px solid var(--color-accent-r);
+    padding: 5px 15px 5px 15px;
 }
 
 /* dynamic sizing */

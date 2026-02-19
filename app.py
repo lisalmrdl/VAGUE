@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import src.searchEngine as engine
-from src.database import close_db
+from src.database import close_db, plot_ratings, plot_genre_pie
 from pprint import pprint
 import markdown
 
@@ -54,7 +54,6 @@ def results():
 
     if request.method == 'POST':
         query = request.form.get("query")
-
     else: # GET
         query = request.args.get("query")
 
@@ -69,13 +68,25 @@ def results():
     df_results = engine.show_results(engine.smart_search_router(query))  # db version
     #results = search_games(query)   # dummy data version
 
+    if df_results is None or df_results.empty:
+        return render_template(
+            "search.html",
+            query=query,
+            results={}
+        )
+
     # TODO: change this, I am going to do something very ugly and inefficient
     results = []
     for i in df_results.index:
-        print(i)
+        # print(i)
         results.append(df_results.loc[i].to_dict())
         results[-1]["id"] = i
-    pprint(results[0])
+    # pprint(results[0])
+
+    ids = [r["id"] for r in results]
+
+    plot_ratings(ids, "static/plots/ranking.png")
+    plot_genre_pie(ids, "static/plots/genres_pie.png")
     
     return render_template(
         "search.html",

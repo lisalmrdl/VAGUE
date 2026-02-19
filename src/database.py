@@ -5,6 +5,9 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 from pprint import pprint
 from flask import g
+import matplotlib
+matplotlib.use("Agg")  # Non-GUI backend for servers
+
 import matplotlib.pyplot as plt
 import numpy as np
 plt.style.use('ggplot')

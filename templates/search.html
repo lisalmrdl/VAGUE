@@ -56,8 +56,22 @@
                     
                     </div>
                     <div class="metadata-view">
+                      {% if results|length > 0 %}
                       <img src="/static/plots/ranking.png" alt="there should be a plot here :(">
                       <img src="/static/plots/genres_pie.png" alt="there should be a plot here :(">
+                      {% else %}
+                      <div class="help">
+                        <p><b>HOW TO SEARCH</b></p>
+                        <p>Type any query in the search bar. Our smart search engine will determine which search function to use.</p>
+                        <p>Trigger <b class="accent">boolean search</b> by adding any of the following operators to your query:</p>
+                          <ul>
+                            <li><code>AND</code>: Results much match both search terms</li>
+                            <li><code>OR</code>: Results may match either search term</li>
+                            <li><code>""</code>: Exact phrase match</li>
+                            <li><code>*</code>: Wildcard, matches any number of characters (including zero)</li>
+                          </ul>
+                      </div>
+                      {% endif %}
                     </div>
                 </div>                
             </div>
