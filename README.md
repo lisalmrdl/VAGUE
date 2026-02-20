@@ -6,10 +6,10 @@ This project is a search engine focused on video games that allows users to sear
 Searches can be specific or related to a particular theme. <br>
 Possible queries are:
 
-- game title
-- genre
-- keywords
-- approximate or similarity-based queries
+  - game title
+  - genre
+  - keywords
+  - approximate or similarity-based queries
 
 ## Motivation
 Industry standards, i.e. Steam, offer varying search results depending on different factors such as the day of the inquery.
@@ -53,22 +53,22 @@ VAGUE/
 
 ## Setup
 **clone repository** <br>
-	git clone https://github.com/lisalmrdl/VAGUE.git <br>
+```git clone https://github.com/lisalmrdl/VAGUE.git```
 **change directory** <br>
-	cd VAGUE <br>
+```cd VAGUE```
 **create virtual enviroment** <br>
-	python3 -m venv venv <br>
+```python3 -m venv venv```
 **activate virtual enviroment** <br>
-	source venv/bin/activate <br>
+```source venv/bin/activate```
 **install dependencies** <br>
-	pip install flask pandas numpy scikit-learn <br>
+```pip install flask pandas numpy scikit-learn```
 
 
 ## Usage
 **Start the application:** <br>
-	python app.py <br>
+>python app.py <br>
 **open in your browser:** <br>
-	#website? <br>
+>#website? <br> or click HERE
 
 GIF
 
