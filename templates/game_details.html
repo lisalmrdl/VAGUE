@@ -6,6 +6,7 @@
 
     <title>V.A.G.U.E. {{ game.id }}</title>
     <link rel="stylesheet" href="../static/styles/styles.css">
+    <link rel="stylesheet" href="../static/styles/styles-games.css">
 </head>
 <body>
   <!-- Header Container -->
@@ -22,25 +23,48 @@
   <div class="body-container">
     <h1>{{ game.name }}</h1>
     {% if game.img %}
-    <div class="game-detail-image">
+    <div class="game-image">
       <img src="{{ game.img }}" 
-         alt="{{ game.name }} cover" 
-         class="game-cover"
-         onerror="this.src='/static/img/placeholder.jpg';">
+          alt="{{ game.name }} cover" 
+          class="game-cover"
+          onerror="/static/img/placeholder.png">
     </div>
     {% endif %}
-    <div class="game-details">
-      <p><strong>Genres:</strong> {{ game.genres.split(",") }}</p>
-      <p><strong>Rating:</strong> {{ game.rating }}</p>
-      <p><strong>Release date:</strong> {{ game.date }}</p>
-      <p><strong>Developers:</strong> {{ game.devs }}</p>
-      <p><strong>Publishers:</strong> {{ game.pubs }}</p>
-      
+    <div class="game-layout">
       <div class="game-description">
         {{ game.desc | safe }}
       </div>
+      <div class="game-details">
+        <div class="genres">
+          <p><b>Tags:</b></p>
+          <ul class="genres-list">
+            {% for genre in game.genres.split(",") %}
+          <li class="tag">{{ genre.strip() }}</li>
+          {% endfor %}
+          </ul>
+        </div>
+        <table class="game-meta-table">
+          <tbody>
+            <tr>
+              <th>User Rating:</th>
+              <td>{{ game.rating }}</td>
+            </tr>
+            <tr>
+              <th>Release date:</th>
+              <td>{{ game.date }}</td>
+            </tr>
+            <tr>
+              <th>Developers</th>
+              <td>{{ game.devs }}</td>
+            </tr>
+            <tr>
+              <th>Publishers</th>
+              <td>{{ game.pubs }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-
   </div>
   <footer>
     <a href="{{ url_for('about') }}">About</a>
