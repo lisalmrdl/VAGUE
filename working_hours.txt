@@ -73,3 +73,6 @@ Ivan: Fixed a bug that was causing the vector to be loaded twice (not really a b
 
 19/02 - 2 hours
 Suchanya: fixed some styling and html, plots are now displayed upon search. also fixed bug where site would crash if a search returned no results.
+
+20/02 - 2 hours
+Suchanya: made some changes to the game details page visuals and preliminary html/styling for the 'similar games' recommendation feature.
