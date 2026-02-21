@@ -77,5 +77,5 @@ Suchanya: fixed some styling and html, plots are now displayed upon search. also
 20/02 - 3 hours
 Suchanya: made some changes to the game details page visuals and preliminary html/styling for the 'similar games' recommendation feature. Working on neural search.
 
-21/02 - 2 hours
-Suchanya: Neural search routing and search toggle button is now working.
+21/02 - 3 hours
+Suchanya: Neural search routing and search toggle button is now working. More css adjustments, limiting the search query length, and a simple recommendation system to show on game details page. The recommendation system uses the neural search backend, and sends the first 1000 characters as a query. Obviously this is not good, so we should probably update the recommendation process to at least do some text processing before querying. and maybe add a few more recommendations like "least similar games".
