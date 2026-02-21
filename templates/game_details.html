@@ -20,7 +20,7 @@
           <input type="checkbox" name="literal" value="literal" id="literal-toggle">
           <span id="toggle-label">LITERAL</span>
         </label>
-        <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
+        <input type="text" name="query" placeholder="Type something" id="user-query" maxLength="200" autofocus>
         <input type="submit" id="search-button" value="Search">
       </form>
     </header>
@@ -69,6 +69,27 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="recommendation-section">
+      <h2>You might also like:</h2>
+      {% if similar|length > 0 %}
+      <div class="similar">
+        <!-- <h3>Similar to this:</h3> -->
+        <div class="similar-results">
+          <ul>
+          {% for game in similar %}
+          <li class="rec-card">
+            <img src="{{ game.img }}" 
+                 alt="{{ game.name }} cover" 
+                 class="game-cover"
+                 onerror="/static/img/placeholder.png">
+            <a class="rec-title" href="{{ url_for('game_details', game_id=game.id) }}">{{ game.name }}</a>
+          </li>
+          {% endfor %}
+          </ul>
+      </div>
+      </div>
+      {% endif %}
     </div>
   </div>
   <footer>

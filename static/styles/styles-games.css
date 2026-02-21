@@ -2,9 +2,6 @@ h1 {
     margin-bottom: 0;
     margin-block-start: 0.5em;
 }
-.body-container {
-    margin: 0px 30px 0px 25px;
-}
 .game-layout {
     display: flex;
     flex-direction: row;  
@@ -43,43 +40,43 @@ h1 {
     flex: 85%;
 }
 .genres p {
-  text-align: left;
-  margin-block-end: 0.5em;
-  margin-block-start: 0.5em;
-  font-size: 1.1em;
+    text-align: left;
+    margin-block-end: 0.5em;
+    margin-block-start: 0.5em;
+    font-size: 1.1em;
 }
 .genres-list {
-  margin-block-start: 0;
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
+    margin-block-start: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
 }
 .tag {
-  background: var(--color-accent-lr);
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-size: 0.85em;
+    background: var(--color-accent-lr);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.85em;
 }
 
 .game-meta-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 1em;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1em;
 }
 .game-meta-table th {
-  text-align: left;
-  font-weight: 500;
-  color: #666;
-  padding: 3px 0;
-  width: 120px;
-  vertical-align: top;
+    text-align: left;
+    font-weight: 500;
+    color: #666;
+    padding: 3px 0;
+    width: 120px;
+    vertical-align: top;
 }
 
 .game-meta-table td {
-  padding: 3px 0;
-  font-weight: 500;
+    padding: 3px 0;
+    font-weight: 500;
 }
 
 .game-meta-table tr {
@@ -94,19 +91,19 @@ h1 {
         gap: 5px;
     }
     .genres p {
-      display: none;
+        display: none;
     }
     .genres {
-      margin-block-start: 0.5em;
+        margin-block-start: 0.5em;
     }
     .game-image {
         max-height: 40vh;
     }
 }
 
-.game-recs h2 {
-  margin-bottom: 10px;
-  color: var(--color-mono-b);
+.recommendation-section h2 {
+    margin-bottom: 10px;
+    color: var(--color-mono-b);
 }
 
 .similar {
@@ -114,37 +111,52 @@ h1 {
 }
 
 .similar h3 {
-  font-size: 1.1em;
-  margin-bottom: 15px;
-  color: var(--color-mono-b);
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: var(--color-mono-b);
 }
 
 /* Results grid */
 .similar-results ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    justify-items: center; /* horizontal center inside each cell */
+    align-items: start;    /* vertical alignment inside each cell, change to center if needed */
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    gap: 20px;
+    
 }
 
 /* Individual card */
 .rec-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 0.85rem;
+    width: 100%;
 }
 
 .rec-card img {
-  width: 80%;
-  border-radius: 8px;
-  border: 1px solid var(--color-mono-b);
+    width: 100%;          /* fills card width */
+    height: 100px;        /* fixed height for all images */
+    border-radius: 3px;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
+  /* border: 1px solid var(--color-mono-b); */
 }
-
+.rec-card a {
+    color: var(--color-mono-b);
+}
 .rec-title {
-  margin-top: 6px;
+    margin-top: 6px;
+    color: var(--color-mono-b);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* truncate long titles */
 }
 /* .body-container h1 { */
 /*     margin-bottom: 10px; */

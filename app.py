@@ -6,6 +6,31 @@ import markdown
 
 app = Flask(__name__)
 
+def query_backend(query, mode):
+    """Wrapper for sending query to search router. It is used for search results and game recommendations. I moved it up here to make it easier to fix later.
+
+    Args:
+        query (str): the query to send to search router
+        mode (bool): True for Literal search, False for Neural search
+
+    Returns:
+        A list of dicts
+    """
+
+    df_results = engine.show_results(engine.smart_search_router(query, mode))  # db version
+
+    if df_results is None or df_results.empty:
+        return {}
+    # TODO: change this, I am going to do something very ugly and inefficient
+    results = []
+    for i in df_results.index:
+        # print(i)
+        results.append(df_results.loc[i].to_dict())
+        results[-1]["id"] = i
+
+    return results
+
+
 @app.teardown_appcontext
 def teardown_db(exception):
     close_db(exception)
@@ -40,25 +65,34 @@ def results():
     # matches the display
     # might be bad idk brain tired
     query_mode = request.args.get("literal", "0") == "literal"
-    print(query_mode)
-    
-    df_results = engine.show_results(engine.smart_search_router(query, query_mode))  # db version
+    # print(query_mode)
 
-    if df_results is None or df_results.empty:
+    
+    # df_results = engine.show_results(engine.smart_search_router(query, query_mode))  # db version
+
+    # if df_results is None or df_results.empty:
+    #     return render_template(
+    #         "search.html",
+    #         query=query,
+    #         results={}
+    #     )
+
+    # # TODO: change this, I am going to do something very ugly and inefficient
+    # results = []
+    # for i in df_results.index:
+    #     # print(i)
+    #     results.append(df_results.loc[i].to_dict())
+    #     results[-1]["id"] = i
+    # # pprint(results[0])
+
+    results = query_backend(query, query_mode)
+    if len(results) < 1:
         return render_template(
             "search.html",
             query=query,
             results={}
         )
-
-    # TODO: change this, I am going to do something very ugly and inefficient
-    results = []
-    for i in df_results.index:
-        # print(i)
-        results.append(df_results.loc[i].to_dict())
-        results[-1]["id"] = i
-    # pprint(results[0])
-
+    
     ids = [r["id"] for r in results]
 
     plot_ratings(ids, "static/plots/ranking.png")
@@ -82,7 +116,14 @@ def game_details(game_id):
 
     game["desc"] = markdown.markdown(game["desc"])
 
-    return render_template("game_details.html", game=game)
+    # TODO: change this, I am going to do something very ugly and inefficient
+    # naive recommendation system, takes the first 500 chars of the description and shoves it into a neural search
+    # TODO maybe some text cleaning before encoding
+    similar = query_backend(game["desc"][:1000], False)  # use neural search for recommendations
+    if len(similar) < 1:
+        return render_template("game_details.html", game=game, similar=similar)
+
+    return render_template("game_details.html", game=game, similar=similar[1:8])
 
 # About page
 @app.route('/about')
