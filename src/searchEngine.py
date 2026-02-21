@@ -6,6 +6,7 @@ import sys
 import os
 import src.database as db
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sentence_transformers import SentenceTransformer
 
 ######## GLOBAL VARIABLES #########
 
@@ -29,6 +30,10 @@ vocab_cols = pd.Series(tfidf_matrix.columns)
 boolean_dict = db.load_boolean_vectors()
 boolean_dict["any"] = (tfidf_matrix != 0).astype('int8') # NOTE: Temporary fix, turn everything that is not 0 into one.
 boolean_unified = boolean_dict["any"] # NOTE: careful, this is a pointer
+
+#neural
+neural_matrix = db.load_neural_embeddings()
+neural_model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 
 ######## FUNCTIONS #######
 
@@ -66,6 +71,10 @@ def smart_search_router(query: str, top_k: int = 100):
     results = []
     mode = ""
 
+    # force neural for testing
+    mode = "Neural (Testing)"
+    return search_neural(query, neural_matrix, top_k)
+    
     if is_logic:
         mode = "BOOLEAN (Strict)"
         results = search_boolean(query, boolean_unified, top_k)
@@ -114,6 +123,31 @@ def expand_token(token: str, vocab: pd.Series):
             return [stem]
 
     return []
+
+# Neural Search (testing)
+def search_neural(query: str, matrix: pd.DataFrame, top_k: int = 100):
+
+    print("Neural!")
+    # TODO Parse query to handle exact matches, skipped for now. Currently encodes the entire query
+    # phrases, raw_tokens = parse_query(query)
+
+    # 2. Encode query
+    query_vec = neural_model.encode([query])[0]
+
+    # 3. Compare embeddings
+    similarities = cosine_similarity([query_vec], matrix.values)[0]
+
+    # 4. Results
+    scores = pd.Series(similarities, index=matrix.index)
+    sorted_scores = scores.sort_values(ascending=False)
+
+    for game_id, score in sorted_scores.head(5).items():
+        print(f"ID: {game_id} | Score: {score:.4f}")
+        
+    if top_k is None:
+        return sorted_scores.index.tolist()
+    else:
+        return sorted_scores.head(top_k).index.tolist()
 
 #TF-IDF (by default)
 def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: int = 100):
