@@ -6,41 +6,9 @@ import markdown
 
 app = Flask(__name__)
 
-# dummy_data = [{"id": 1,
-#                "name": "Amazing Game",
-#                "date": 2002,
-#                "publisher": "Publisher",
-#                "genres": "Genre 1",
-#                "rating": 2.3,
-#                "desc": "Here be the game description."
-#                },
-#               {"id": 2,
-#                "name": "Amazing Game 2",
-#                "date": 2022,
-#                "publisher": "Publisher",
-#                "genres": "Genre 1, Genre 2, Genre 3",
-#                "rating": 1.9,
-#                "desc": "Another description."
-#                }]
-
-
-# def get_game_by_id(g_id):
-#     return next((g for g in dummy_data if g["id"] == g_id), {"id": 0,
-#                "name": "Placeholder",
-#                "date": 0000,
-#                "publisher": "Publisher",
-#                "genres": "Genre 1, Genre 2, Genre 3",
-#                "rating": 0.0,
-#                "desc": "There is no game to be found here."
-#               })
-
 @app.teardown_appcontext
 def teardown_db(exception):
     close_db(exception)
-
-# def search_games(query):
-#     """Temporary query function for testing frontend with dummy data"""
-#     return [game for game in dummy_data if query.lower() in game["title"].lower()]
     
 # Home Page
 @app.route('/')
@@ -65,8 +33,16 @@ def results():
             results={}
         )
 
-    df_results = engine.show_results(engine.smart_search_router(query))  # db version
-    #results = search_games(query)   # dummy data version
+    # query_mode is a bool
+    # gets mode from the toggle next to the search bar
+    # if = 1, then is True then Literal Search
+    # else Neural Search.
+    # matches the display
+    # might be bad idk brain tired
+    query_mode = request.args.get("literal", "0") == "literal"
+    print(query_mode)
+    
+    df_results = engine.show_results(engine.smart_search_router(query, query_mode))  # db version
 
     if df_results is None or df_results.empty:
         return render_template(

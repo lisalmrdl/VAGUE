@@ -42,6 +42,9 @@ body {
 .accent {
     color: var(--color-accent-r);
 }
+.accent-b {
+    color: var(--color-accent-b);
+}
 a:link, a:visited {
     color: var(--color-mono-w);
     text-decoration: none;
@@ -87,7 +90,8 @@ header {
 
     /* inside */
     padding: 10px;
-    max-width: 70%;
+    /* max-width: 60%; */
+    width: 55%;
 }
 
 .search-bar #user-query {
@@ -95,10 +99,27 @@ header {
     border-radius: var(--border-rad-s);
     padding: 0px 0px 0px 10px;
     font-size: 1rem;
-    width: 50vw;
+    width: 80%;
     border: 2px solid var(--color-mono-g);
     background-color: var(--color-mono-l);
     color: var(--color-mono-b);
+}
+
+/* search style toggle */
+.mode-toggle-button {
+    cursor: pointer;
+    align-content: center;
+}
+.mode-toggle-button input {
+    display: none;
+}
+#toggle-label {
+    border: 3px solid;
+    border-color: var(--color-accent-b);
+    border-radius: 3px;
+    color: var(--color-accent-b);
+    font-size: 1.1em;
+    padding: 2px 8px;
 }
 
 /* Style for the submit button */
@@ -113,7 +134,6 @@ header {
     cursor: pointer; /* Cursor turns into a pointer when hovering */
     transition: ease;
 }
-
 /* Hover effect for the button */
 #search-button:hover {
     background-color: var(--color-accent-dr);

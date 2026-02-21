@@ -58,35 +58,37 @@ def show_results(game_ids):
     
     return df_res[display_cols]
 
-def smart_search_router(query: str, top_k: int = 100):
+def smart_search_router(query: str, literal_search: bool, top_k: int = 100):
     #text for the exact match
     all_data = pd.read_sql(db.get_text_gamedata(as_text=True), db.get_db()) # NOTE: No need to load de data yet. We can first compute the search. DELETE
     if not all_data.empty:
         search_text_ref = all_data.set_index('id_game')['description'].fillna("").str.lower()
     else:
         search_text_ref = pd.Series()
-    #boolean detection
-    is_logic = bool(re.search(r'\b(AND|OR|NOT)\b', query))
-    
+
     results = []
     mode = ""
 
-    # force neural for testing
-    mode = "Neural (Testing)"
-    return search_neural(query, neural_matrix, top_k)
-    
-    if is_logic:
-        mode = "BOOLEAN (Strict)"
-        results = search_boolean(query, boolean_unified, top_k)
+    if literal_search:
+        #boolean detection
+        # TODO since the search is now decided via toggle, do we want to read lowercase operators as boolean too?
+        is_logic = bool(re.search(r'\b(AND|OR|NOT)\b', query))
+
+        if is_logic:
+            mode = "BOOLEAN (Strict)"
+            results = search_boolean(query, boolean_unified, top_k)
         
-        if results is None or len(results) == 0:
-            print(f"Nothing found, switching up to TF-IDF")
-            mode = "TF-IDF (Fallback)"
-            results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k)
+            if results is None or len(results) == 0:
+                print(f"Nothing found, switching up to TF-IDF")
+                mode = "TF-IDF (Fallback)"
+                results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k)
             
+        else:
+            mode = "TF-IDF"
+            results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k)
     else:
-        mode = "TF-IDF"
-        results = search_tfidf(query, tfidf_matrix, search_text_ref, top_k)
+        mode = "NEURAL"
+        results = search_neural(query, neural_matrix, top_k)
     
     print(f"Mode : {mode} | Résultats : {len(results)}")
     return results
@@ -127,7 +129,6 @@ def expand_token(token: str, vocab: pd.Series):
 # Neural Search (testing)
 def search_neural(query: str, matrix: pd.DataFrame, top_k: int = 100):
 
-    print("Neural!")
     # TODO Parse query to handle exact matches, skipped for now. Currently encodes the entire query
     # phrases, raw_tokens = parse_query(query)
 
@@ -141,8 +142,8 @@ def search_neural(query: str, matrix: pd.DataFrame, top_k: int = 100):
     scores = pd.Series(similarities, index=matrix.index)
     sorted_scores = scores.sort_values(ascending=False)
 
-    for game_id, score in sorted_scores.head(5).items():
-        print(f"ID: {game_id} | Score: {score:.4f}")
+    # for game_id, score in sorted_scores.head(5).items():
+    #     print(f"ID: {game_id} | Score: {score:.4f}")
         
     if top_k is None:
         return sorted_scores.index.tolist()

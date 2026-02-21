@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>V.A.G.U.E. Search</title>
     <link rel="stylesheet" href="../static/styles/styles.css">
+    <script src="../static/js/visuals.js"></script>
 </head>
 <body>
         <!-- Header Container -->
@@ -14,6 +16,10 @@
             <a class="logo" href="{{ url_for('home') }}">V.A.G.U.E.</a>
 
             <form class="search-bar" method="GET" action="/results">
+              <label class="mode-toggle-button">
+                <input type="checkbox" name="literal" value="literal" id="literal-toggle">
+                  <span id="toggle-label">LITERAL</span>
+              </label>
               <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
               <input type="submit" id="search-button" value="Search">
             </form>
@@ -61,15 +67,31 @@
                       <img src="/static/plots/genres_pie.png" alt="there should be a plot here :(">
                       {% else %}
                       <div class="help">
-                        <p><b>HOW TO SEARCH</b></p>
-                        <p>Type any query in the search bar. Our smart search engine will determine which search function to use.</p>
-                        <p>Trigger <b class="accent">boolean search</b> by adding any of the following operators to your query:</p>
-                          <ul>
-                            <li><code>AND</code>: Results much match both search terms</li>
-                            <li><code>OR</code>: Results may match either search term</li>
-                            <li><code>""</code>: Exact phrase match</li>
-                            <li><code>*</code>: Wildcard, matches any number of characters (including zero)</li>
-                          </ul>
+                        <p><b>HOW TO:</b></p>
+                        <p>Select your preferred search method using the toggle button to the left of the search bar.</p>
+                        <p><b class="accent-b">LITERAL mode</b>: Uses TF-IDF or BOOLEAN to find matches based on word frequency.</p>
+                        <p>Trigger BOOLEAN search by including operators in your query:</p>
+                        <table class="boolean-search-table">
+                          <tbody>
+                            <tr>
+                              <th><code>AND</code></th>
+                              <td>Results must match both search terms</td>
+                            </tr>
+                            <tr>
+                              <th><code>OR</code></th>
+                              <td>Results may match either search term</td>
+                            </tr>
+                            <tr>
+                              <th><code>""</code></th>
+                              <td>Exact phrase match</td>
+                            </tr>
+                            <tr>
+                              <th><code>*</code></th>
+                              <td>Wildcard, matches any number of characters (including zero)</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <p><b class="accent">NEURAL mode</b>: Semantic search finds results based on meaning rather than exact words. Great for vague or descriptive queries like “fun racing games” or “summer vibes”.</p> 
                       </div>
                       {% endif %}
                     </div>

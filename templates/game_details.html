@@ -7,6 +7,7 @@
     <title>V.A.G.U.E. {{ game.id }}</title>
     <link rel="stylesheet" href="../static/styles/styles.css">
     <link rel="stylesheet" href="../static/styles/styles-games.css">
+    <script src="../static/js/visuals.js"></script>
 </head>
 <body>
   <!-- Header Container -->
@@ -15,6 +16,10 @@
       <a class="logo" href="{{ url_for('home') }}">V.A.G.U.E.</a>
 
       <form class="search-bar" method="GET" action="/results">
+        <label class="mode-toggle-button">
+          <input type="checkbox" name="literal" value="literal" id="literal-toggle">
+          <span id="toggle-label">LITERAL</span>
+        </label>
         <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
         <input type="submit" id="search-button" value="Search">
       </form>

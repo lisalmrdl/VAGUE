@@ -6,6 +6,7 @@
 
     <title>V.A.G.U.E. Landing</title>
     <link rel="stylesheet" href="../static/styles/styles-home.css">
+    <script src="../static/js/visuals.js"></script>
 </head>
 <body>
         <!-- Header Container -->
@@ -22,23 +23,44 @@
         </header>
 
         <div class="search-container">
-            <div class="search-card">
-                <form class="search-bar" method="GET" action="/results">
-                    <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
-                    <input type="submit" id="search-button" value="Search">
-                </form>
-            </div>
-            <div class="search-description">
-              <p>A <b class="accent">VAGUE</b>ly accurate search engine for games! Search our modest database of games using boolean, tf-idf, or a <i class="fade">secret third search</i>. Discover new games or look up old favorites.</p>
-              <p><b>HOW TO</b></p>
-              <p>Type any query in the search bar. Our smart search engine will determine which search function to use. Trigger boolean search by adding operators to your query:<p>
-                <ul>
-                  <li><code>AND</code>: Results much match both search terms</li>
-                  <li><code>OR</code>: Results may match either search term</li>
-                  <li><code>""</code>: Exact phrase match</li>
-                  <li><code>*</code>: Wildcard, matches any number of characters (including zero)</li>
-              </ul>
-            </div>
+          <div class="search-card">
+            <form class="search-bar" method="GET" action="/results">
+              <label class="mode-toggle-button">
+                <input type="checkbox" name="literal" value="literal" id="literal-toggle">
+                <span id="toggle-label">LITERAL</span>
+              </label>
+              <input type="text" name="query" placeholder="Type something" id="user-query" autofocus>
+              <input type="submit" id="search-button" value="Search">
+            </form>
+          </div>
+          <div class="search-description">
+            <p>A <b class="accent">VAGUE</b>ly accurate search engine for games! Search our modest database of games using boolean, tf-idf, or neural search. Discover new games or look up old favorites!</p>
+            <p><b>HOW TO:</b></p>
+            <p>Select your preferred search method using the toggle button to the left of the search bar.</p>
+            <p><b class="accent-b">LITERAL mode</b>: Uses TF-IDF or BOOLEAN to find matches based on word frequency.</p>
+            <p>Trigger BOOLEAN search by including operators in your query:</p>
+            <table class="boolean-search-table">
+              <tbody>
+                <tr>
+                  <th><code>AND</code></th>
+                  <td>Results must match both search terms</td>
+                </tr>
+                <tr>
+                  <th><code>OR</code></th>
+                  <td>Results may match either search term</td>
+                </tr>
+                <tr>
+                  <th><code>""</code></th>
+                  <td>Exact phrase match</td>
+                </tr>
+                <tr>
+                  <th><code>*</code></th>
+                  <td>Wildcard, matches any number of characters (including zero)</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b class="accent">NEURAL mode</b>: Semantic search finds results based on meaning rather than exact words. Great for vague or descriptive queries like “fun racing games” or “summer vibes”.</p> 
+          </div>
         </div>
     </div>
     

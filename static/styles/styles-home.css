@@ -79,6 +79,9 @@ header {
 .accent {
     color: var(--color-accent-r);
 }
+.accent-b {
+    color: var(--color-accent-b);
+}
 .fade {
     color: var(--color-mono-g);
 }
@@ -152,6 +155,45 @@ header {
 #user-query:focus {
     border-color: var(--color-accent-r);
     outline: none;
+}
+
+/* search style toggle */
+.mode-toggle-button {
+    cursor: pointer;
+    align-content: center;
+}
+.mode-toggle-button input {
+    display: none;
+}
+#toggle-label {
+    border: 3px solid;
+    border-color: var(--color-accent-b);
+    border-radius: 3px;
+    color: var(--color-accent-b);
+    font-size: 1.1em;
+    padding: 2px 8px;
+}
+.boolean-search-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1em;
+}
+.boolean-search-table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--color-accent-r);
+  padding: 3px 8px;
+  /* width: 120px; */
+  vertical-align: top;
+}
+
+.boolean-search-table td {
+  padding: 3px 0;
+  font-weight: 500;
+}
+
+.boolean-search-table tr {
+    border-bottom: 1px solid #eee;
 }
 
 footer {
