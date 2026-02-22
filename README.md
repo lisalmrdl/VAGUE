@@ -68,7 +68,7 @@ VAGUE/
 **Start the application:** <br>
   python app.py <br>
 **open in your browser:** <br>
-  http://127.0.0.1:5000 or click [HERE] (http://127.0.0.1:5000)
+  http://127.0.0.1:5000 or click [HERE](http://127.0.0.1:5000)
 
 GIF
 
