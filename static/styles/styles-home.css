@@ -26,6 +26,7 @@ html {
     --color-accent-b: #b4c4d0;
 
     --color-accent-dr: #7d2e2c;
+    --color-accent-db:#8ca4b7;
 
     --color-accent-lr: hsl(2, 68%, 87%);
 
@@ -47,6 +48,44 @@ a:hover {
     color: var(--color-mono-w);
 }
 
+/* search style toggle */
+.mode-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    padding: 0;
+    width: 60px;
+}
+.mode-button input {
+    display: none;
+}
+.mode-button span {
+    color: #eee;
+    background-color: #dbdbdb;
+    border: 3px solid var(--color-mono-w);
+    border-radius: 3px;
+    font-size: 0.8em;
+    padding: 2px 8px;
+    transition: 0.15s ease;
+    position: relative;
+    z-index: 1;
+}
+/* Default state → NEURAL active */
+#literal-toggle:not(:checked) ~ .neu {
+    border-color: var(--color-accent-dr);
+    background-color: var(--color-accent-r);
+    color: var(--color-mono-l);
+    z-index: 2;
+}
+
+/* Checked state → LITERAL active */
+#literal-toggle:checked ~ .lit {
+    border-color: var(--color-accent-db);
+    background-color: var(--color-accent-b);
+    color: var(--color-mono-l);
+    z-index: 2;
+}
 header {
     padding: 15px 25px;
     font-family: 'Jersey 25', sans-serif;

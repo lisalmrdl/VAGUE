@@ -26,6 +26,7 @@ html {
     --color-accent-b: #b4c4d0;
 
     --color-accent-dr: #7d2e2c;
+    --color-accent-db:#8ca4b7;
 
     --color-accent-lr: hsl(2, 68%, 87%);
 
@@ -106,20 +107,42 @@ header {
 }
 
 /* search style toggle */
-.mode-toggle-button {
-    cursor: pointer;
-    align-content: center;
+.mode-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    padding: 0;
+    width: 60px;
 }
-.mode-toggle-button input {
+.mode-button input {
     display: none;
 }
-#toggle-label {
-    border: 3px solid;
-    border-color: var(--color-accent-b);
+.mode-button span {
+    color: #565656;
+    background-color: #3d3d3d;
+    border: 3px solid var(--color-mono-b);
     border-radius: 3px;
-    color: var(--color-accent-b);
-    font-size: 1.1em;
+    font-size: 0.8em;
     padding: 2px 8px;
+    transition: 0.15s ease;
+    position: relative;
+    z-index: 1;
+}
+/* Default state → NEURAL active */
+#literal-toggle:not(:checked) ~ .neu {
+    border-color: var(--color-accent-dr);
+    background-color: var(--color-accent-r);
+    color: var(--color-mono-l);
+    z-index: 2;
+}
+
+/* Checked state → LITERAL active */
+#literal-toggle:checked ~ .lit {
+    border-color: var(--color-accent-db);
+    background-color: var(--color-accent-b);
+    color: var(--color-mono-l);
+    z-index: 2;
 }
 
 /* Style for the submit button */
@@ -149,7 +172,7 @@ header {
 
 .body-container {
     padding: 15px 0px 15px 15px;
-    margin: 0px 30px 0px 25px;
+    margin: 0px 30px 0px 25px;}
 }
 
 .results-header,

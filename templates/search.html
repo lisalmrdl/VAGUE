@@ -16,10 +16,13 @@
             <a class="logo" href="{{ url_for('home') }}">V.A.G.U.E.</a>
 
             <form class="search-bar" method="GET" action="/results">
-              <label class="mode-toggle-button">
-                <input type="checkbox" name="literal" value="literal" id="literal-toggle">
-                  <span id="toggle-label">LITERAL</span>
-              </label>
+              <div class="mode-toggle">
+                <label class="mode-button">
+                  <input type="checkbox" name="literal" value="literal" id="literal-toggle">
+                  <span class="lit">LITERAL</span>
+                  <span class="neu">NEURAL</span>
+                </label>
+              </div>
               <input type="text" name="query" placeholder="Type something" id="user-query" maxLength="200" autofocus>
               <input type="submit" id="search-button" value="Search">
             </form>
