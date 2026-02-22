@@ -81,5 +81,5 @@ Suchanya: made some changes to the game details page visuals and preliminary htm
 Suchanya: Neural search routing and search toggle button is now working. More css adjustments, limiting the search query length, and a simple recommendation system to show on game details page. The recommendation system uses the neural search backend, and sends the first 1000 characters as a query. Obviously this is not good, so we should probably update the recommendation process to at least do some text processing before querying. and maybe add a few more recommendations like "least similar games".
 
 
-22/02 - 5 hours
-Ina: Readme update, clickable search buttons for search results, identifying problems with starting the application
+22/02 - 7 hours
+Ina: Readme update, clickable search buttons for search results, identifying problems with starting the application, fixing some issues with the display of the results
