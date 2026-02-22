@@ -52,16 +52,16 @@
                         <div class="game-publisher">{{ game.devs }}</div>
                         <div class="game-genres">
                           {% for genre in game.genres.split(",") %}
-                          <span class="genre">{{ genre }}</span>
-                          {% endfor %}
-                        </div>
-                      </div>
-                      <div class="game-rating">{{ game.rating }}</div>
+                            {% set genre = g.strip() %}
+                    <div class="game-genres">
+                      {% for g in game.genres.split(",") %}
+                        {% set genre = g.strip() %}
+                       <a class="genre"
+                          href="{{ url_for('results') }}?genre={{ genre|urlencode }}{% if query is defined and query %}&query={{ query|urlencode }}{% endif %}{% if request.args.get('literal') %}&literal=literal{% endif %}">
+                         {{ genre }}
+                         </a>
+                      {% endfor %}
                     </div>
-                    {% endfor %}
-                    
-                    </div>
-                    <div class="metadata-view">
                       {% if results|length > 0 %}
                       <img src="/static/plots/ranking.png" alt="there should be a plot here :(">
                       <img src="/static/plots/genres_pie.png" alt="there should be a plot here :(">

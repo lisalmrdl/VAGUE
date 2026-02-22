@@ -54,7 +54,7 @@ VAGUE/
 ## Setup
 **clone repository** <br>
   ```git clone https://github.com/lisalmrdl/VAGUE.git```
-**change directory** <br>
+<br>**change directory** <br>
   ```cd VAGUE```
 <br>**create virtual enviroment** <br>
   ```python3 -m venv venv```
