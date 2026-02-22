@@ -72,36 +72,41 @@
           </div>
 
           {% if results|length > 0 %}
-          <img src="/static/plots/ranking.png" alt="there should be a plot here :(">
-          <img src="/static/plots/genres_pie.png" alt="there should be a plot here :(">
+          <div class="metadata-view">
+            <img src="/static/plots/ranking.png" alt="there should be a plot here :(">
+            <img src="/static/plots/genres_pie.png" alt="there should be a plot here :(">
+          </div>
           {% else %}
-          <div class="help">
-            <p><b>HOW TO:</b></p>
-            <p>Select your preferred search method using the toggle button to the left of the search bar.</p>
-            <p><b class="accent-b">LITERAL mode</b>: Uses TF-IDF or BOOLEAN to find matches based on word frequency.</p>
-            <p>Trigger BOOLEAN search by including operators in your query:</p>
-            <table class="boolean-search-table">
-              <tbody>
-                <tr>
-                  <th><code>AND</code></th>
-                  <td>Results must match both search terms</td>
-                </tr>
-                <tr>
-                  <th><code>OR</code></th>
-                  <td>Results may match either search term</td>
-                </tr>
-                <tr>
-                  <th><code>""</code></th>
-                  <td>Exact phrase match</td>
-                </tr>
-                <tr>
-                  <th><code>*</code></th>
-                  <td>Wildcard, matches any number of characters (including zero)</td>
-                </tr>
-              </tbody>
-            </table>
-            <p><b class="accent">NEURAL mode</b>: Semantic search finds results based on meaning rather than exact
-              words. Great for vague or descriptive queries like “fun racing games” or “summer vibes”.</p>
+          <div class="metadata-view">
+            <div class="help">
+              <p><b>HOW TO:</b></p>
+              <p>Select your preferred search method using the toggle button to the left of the search bar.</p>
+              <p><b class="accent-b">LITERAL mode</b>: Uses TF-IDF or BOOLEAN to find matches based on word frequency.
+              </p>
+              <p>Trigger BOOLEAN search by including operators in your query:</p>
+              <table class="boolean-search-table">
+                <tbody>
+                  <tr>
+                    <th><code>AND</code></th>
+                    <td>Results must match both search terms</td>
+                  </tr>
+                  <tr>
+                    <th><code>OR</code></th>
+                    <td>Results may match either search term</td>
+                  </tr>
+                  <tr>
+                    <th><code>""</code></th>
+                    <td>Exact phrase match</td>
+                  </tr>
+                  <tr>
+                    <th><code>*</code></th>
+                    <td>Wildcard, matches any number of characters (including zero)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p><b class="accent">NEURAL mode</b>: Semantic search finds results based on meaning rather than exact
+                words.</p>
+            </div>
           </div>
           {% endif %}
         </div> <!-- closes .results-body -->
