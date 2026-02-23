@@ -48,15 +48,20 @@ def show_results(game_ids):
     #converting in dataframe
     cols = ["id", "name", "genres", "desc", "devs", "pubs", "img", "web", "sold", "rating", "count", "meta", "date"]
     df_res = pd.DataFrame(rows, columns=cols)
-    print(df_res.head())
     #only keeping the "interesting" informations
     display_cols = ["name", "genres", "date", "desc", "meta", "img", "rating", "devs", "pubs"]
     
     #reorganizing the dataframe per ids
     df_res = df_res.set_index("id").reindex(game_ids) # NOTE Why was the index being reset?!
-    print(df_res.head())
     
     return df_res[display_cols]
+
+def weighted_similarity(query_vec, matrix, sort=True, weights=[0.8, 0.1, 0.1]):
+    similarities = cosine_similarity(query_vec, matrix.values)[0]
+    # 4. Results
+    w = db.get_similarity_weights(matrix.index)
+    weigthed_scores = (weights[0] * pd.Series(similarities, index=matrix.index)) + (weights[1] * w["rating"]) + (weights[2] * w["ratings_count"])
+    return weigthed_scores.sort_values(ascending=False)
 
 def smart_search_router(query: str, literal_search: bool, top_k: int = 100):
     #text for the exact match
@@ -134,13 +139,8 @@ def search_neural(query: str, matrix: pd.DataFrame, top_k: int = 100):
 
     # 2. Encode query
     query_vec = neural_model.encode([query])[0]
-
     # 3. Compare embeddings
-    similarities = cosine_similarity([query_vec], matrix.values)[0]
-
-    # 4. Results
-    scores = pd.Series(similarities, index=matrix.index)
-    sorted_scores = scores.sort_values(ascending=False)
+    sorted_scores = weighted_similarity([query_vec], matrix)
 
     # for game_id, score in sorted_scores.head(5).items():
     #     print(f"ID: {game_id} | Score: {score:.4f}")
@@ -172,12 +172,7 @@ def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: i
         ngram_range=(1, 1)
     )
     query_vec = np.asarray(vectorizer.fit_transform([query]).todense())
-    #cosinus calculus
-    similarities = cosine_similarity(query_vec, matrix)
-    scores = pd.Series(similarities[0], index=matrix.index)
-    
-    #main changes here to delete the 10 limit
-    sorted_scores = scores.sort_values(ascending=False)
+    sorted_scores = weighted_similarity(query_vec, matrix)
 
     if top_k is None:
         candidates = sorted_scores

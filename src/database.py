@@ -193,7 +193,7 @@ def get_text_gamedata(limit = 0, as_text = False):
     else:
         return cur.execute(q).fetchall()
     
-def get_similarity_weigths(game_ids, normalized=True):
+def get_similarity_weights(game_ids, normalized=True):
     """
     Fetch the appropriate columns from the database from which the similarity is weighted (the search should take into account the similarity together with the popularity of a game for the search results). For now the similarity should be weighted using the rating and the amount of ratings, this function returns a dataframe containing these as columns. The dataframe is normalized by default (using the max value as a reference for the division).
 

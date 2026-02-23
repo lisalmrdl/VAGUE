@@ -85,3 +85,6 @@ Suchanya: Changed the toggle button style. This should make it clearer which mod
 
 22/02 - 7 hours
 Ina: Readme update, clickable search buttons for search results, identifying problems with starting the application, fixing some issues with the display of the results
+
+23/02 - 1 hour
+Ivan: Weighted similarity with the number of ratings and the rating score (the weights can be adjusted), it's implemented in a different function for the sake of reusability. Deleted some debug prints and unused comments.
