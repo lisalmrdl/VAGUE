@@ -102,8 +102,8 @@ def results():
     
     ids = [r["id"] for r in results]
 
-    plot_ratings(ids, "static/plots/ranking.png")
-    plot_genre_pie(ids, "static/plots/genres_pie.png")
+    plot_ratings(ids)
+    plot_genre_pie(ids)
     
     return render_template(
         "search.html",
