@@ -53,22 +53,22 @@ VAGUE/
 
 ## Setup
 **clone repository** <br>
-```git clone https://github.com/lisalmrdl/VAGUE.git```
-**change directory** <br>
-```cd VAGUE```
-**create virtual enviroment** <br>
-```python3 -m venv venv```
-**activate virtual enviroment** <br>
-```source venv/bin/activate```
-**install dependencies** <br>
-```pip install flask pandas numpy scikit-learn```
+  ```git clone https://github.com/lisalmrdl/VAGUE.git```
+<br>**change directory** <br>
+  ```cd VAGUE```
+<br>**create virtual enviroment** <br>
+  ```python3 -m venv venv```
+<br>**activate virtual enviroment** <br>
+  ```source .venv/bin/activate```
+<br>**install dependencies** <br>
+  ```pip install flask pandas numpy scikit-learn matplotlib markdown sentence-transformers```
 
 
 ## Usage
 **Start the application:** <br>
->python app.py <br>
+  python app.py <br>
 **open in your browser:** <br>
->#website? <br> or click HERE
+  http://127.0.0.1:5000 or click [HERE](http://127.0.0.1:5000)
 
 GIF
 

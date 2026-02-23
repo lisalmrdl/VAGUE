@@ -86,6 +86,13 @@ def results():
     # # pprint(results[0])
 
     results = query_backend(query, query_mode)
+    genre = (request.args.get("genre") or "").strip()
+    if genre:
+        gl = genre.lower()
+        results = [
+            r for r in results
+            if gl in [p.strip().lower() for p in (r.get("genres") or "").split(",")]
+        ]
     if len(results) < 1:
         return render_template(
             "search.html",
@@ -95,8 +102,8 @@ def results():
     
     ids = [r["id"] for r in results]
 
-    plot_ratings(ids, "static/plots/ranking.png")
-    plot_genre_pie(ids, "static/plots/genres_pie.png")
+    plot_ratings(ids)
+    plot_genre_pie(ids)
     
     return render_template(
         "search.html",

@@ -28,12 +28,12 @@ def get_db():
         g.db.row_factory = sql.Row
     return g.db
 
-def plot_ratings(ids: list, output_file=path / ".." / ".temp" / "ranking.png"):
+def plot_ratings(ids: list, output_file=path / ".." / "static" / "plots" / "ranking.png"):
     """Gets a list of game ids and creates a plot with the rating of the games associated with the ids. The plot is sorted and has 10 evenly spaced bins. The plot is saved as a png image. It's possible to give a path to a file to save the image in such location, look at the arguments.
 
     Args:
         ids (list): list containing the games' ids
-        output_file (_type_, optional): Path to the file where the plot image will be saved. Defaults to ./../.temp/ranking.png
+        output_file (_type_, optional): Path to the file where the plot image will be saved. Defaults to ./../static/plots/ranking.png
     """
     data = pd.read_sql(get_all_gamedata(ids=ids, as_text=True), get_db())["rating"]
     plt.figure()
@@ -45,12 +45,12 @@ def plot_ratings(ids: list, output_file=path / ".." / ".temp" / "ranking.png"):
     plt.savefig(output_file)
     plt.close()
 
-def plot_genre_pie(ids: list, output_file=path / ".." / ".temp" / "genres_pie.png", top_n = 7):
+def plot_genre_pie(ids: list, output_file=path / ".." / "static" / "plots" / "genres_pie.png", top_n = 7):
     """Gets a list of game ids and creates a pie chart with the genres of the games. The plot is sorted and has 10 evenly spaced bins. The chart is saved as a png image. It's possible to give a path to a file to save the image in such location, look at the arguments.
 
     Args:
         ids (list): list containing the games' ids
-        output_file (_type_, optional): Path to the file where the plot image will be saved. Defaults to ./../.temp/ranking.png
+        output_file (_type_, optional): Path to the file where the plot image will be saved. Defaults to ./../static/plots/ranking.png
         top_n (int): Only the top n will be displayed, the others will be displayed as "Other". Defaults to 7.
     """
     data = pd.read_sql(get_genres(ids=ids, as_text=True), get_db())
