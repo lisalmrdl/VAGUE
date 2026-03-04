@@ -152,12 +152,15 @@ h1 {
     color: var(--color-mono-b);
 }
 .rec-title {
-    margin-top: 6px;
+    margin: 6px 8px;
     color: var(--color-mono-b);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* truncate long titles */
+    flex-wrap: wrap;
+    text-decoration: none;
 }
+.rec-title:hover {
+    text-decoration: underline;
+}
+
 /* .body-container h1 { */
 /*     margin-bottom: 10px; */
 /* } */

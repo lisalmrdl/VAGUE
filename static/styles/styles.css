@@ -46,17 +46,14 @@ body {
 .accent-b {
     color: var(--color-accent-b);
 }
-a:link, a:visited {
+header a:link, header a:visited,
+footer a:link, footer a:visited {
     color: var(--color-mono-w);
     text-decoration: none;
 }
-a:hover {
+header a:hover, footer a:hover {
     text-decoration: underline;
     color: var(--color-mono-w);
-}
-body a:link, body a:visited {
-    color: var(--color-mono-b);
-    text-decoration: none;
 }
 header {
     padding: 5px 25px;
@@ -242,17 +239,23 @@ header {
     flex-wrap: wrap;
     gap: 3px;
 }
-.genre {
+.game-genres a:link {
+    color: var(--color-mono-b);
+    text-decoration: none;
+}
+.genre, .genre-hilit {
     font-size: 0.7em;
     background-color: var(--color-accent-lr);
     border-radius: 5px;
     padding: 2px 8px 0px 8px;
 }
-.genre:hover {
-    font-size: 0.73em;
+.genre-hilit {
     background-color: var(--color-accent-r);
     color: var(--color-mono-w);
-    transition: 0.1s ease;
+}
+.genre:hover, a.genre:hover {
+    background-color: var(--color-accent-dr);
+    color: var(--color-mono-w);
 }
 
 .game-rating {

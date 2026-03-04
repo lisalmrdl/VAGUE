@@ -3,6 +3,12 @@ import src.searchEngine as engine
 from src.database import close_db, plot_ratings, plot_genre_pie
 from pprint import pprint
 import markdown
+import re
+
+# TODO: maybe change this (and quick_preprocess)
+# Very simple preprocessing, the naive "take the first 1000 chars from the description works fine and the results are as expected, but I thought some basic text preprocessing might make it better
+PUNCT_RE = re.compile(r"[^\w\s]")
+STOPWORDS = {"the","and","a","an","of","in","on","to","at","from"}  # minimal set of stopwords for basic text preprocessing
 
 app = Flask(__name__)
 
@@ -29,6 +35,24 @@ def query_backend(query, mode):
         results[-1]["id"] = i
 
     return results
+
+def quick_preprocess(text):
+    """Function for very basic text preprocessing, used in game details query to search for similar game recommendations.
+
+    Args:
+        text (str): the string to process
+    Returns:
+        text (str): the processed string
+    """
+    
+    text = text.lower()
+
+    text = PUNCT_RE.sub("", text) # removes punctuation
+
+    tokens = text.split()
+    tokens = [t for t in tokens if t not in STOPWORDS]
+
+    return " ".join(tokens)
 
 
 @app.teardown_appcontext
@@ -87,7 +111,8 @@ def results():
 
     results = query_backend(query, query_mode)
     genre = (request.args.get("genre") or "").strip()
-    if genre: # this seems to filter the search by genres which is good
+    
+    if genre:
         gl = genre.lower()
         results = [
             r for r in results
@@ -122,12 +147,13 @@ def game_details(game_id):
     game = df_game.iloc[0].to_dict()
     game["id"] = game_id
 
+    # still using a shortened description, but I made a very basic preprocessing function to maybe fit more content into the query
+    # this comes before markdown so the text doesn't have the html formatting
+    short_desc = quick_preprocess(game["desc"][:2000])
+    
     game["desc"] = markdown.markdown(game["desc"])
-
-    # TODO: change this, I am going to do something very ugly and inefficient
-    # naive recommendation system, takes the first 500 chars of the description and shoves it into a neural search
-    # TODO maybe some text cleaning before encoding
-    similar = query_backend(game["desc"][:1000], False)  # use neural search for recommendations
+    
+    similar = query_backend(short_desc[:1000], False)  # use neural search for recommendations
     if len(similar) < 1:
         return render_template("game_details.html", game=game, similar=similar)
 

@@ -34,8 +34,8 @@
     <div class="game-image">
       <img src="{{ game.img }}" 
           alt="{{ game.name }} cover" 
-          class="game-cover"
-          onerror="/static/img/placeholder.png">
+           class="game-cover"
+           onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/placeholder.png') }}';">
     </div>
     {% endif %}
     <div class="game-layout">

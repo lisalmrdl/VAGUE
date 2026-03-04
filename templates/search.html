@@ -35,11 +35,11 @@
             <div class="results">
               <div class="results-header">
                 {% if query is defined %}
-                    <div class="results-count">{{ results|length }} results for "{{ query }}"</div>
-                    <!-- <div class="extra-actions">
-                        <button class="filter-button">filter</button>
-                        <button class="filter-button">filter</button>
-                    </div> -->
+                <div class="results-count">{{ results|length }} results for "{{ query }}"
+                {% if request.args.get('genre') %}
+                  & genre:{{ request.args.get('genre') }}
+                  {% endif %}
+                </div>
           {% else %}
           <h2>No query :( Type something.</h2>
           {% endif %}
@@ -50,8 +50,7 @@
             {% for game in results %}
             <div class="game-card">
               <img src="{{ game.img }}" alt="{{ game.title }} cover" class="game-thumbnail"
-                onerror="this.onerror=null;this.src='/static/img/placeholder.png';">
-
+                   onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/placeholder.png') }}';">
               <div class="game-info">
                 <a class="game-title" href="{{ url_for('game_details', game_id=game.id) }}">
                   {{ game.name }} ({{ game.date }})
@@ -61,7 +60,7 @@
 
                 <div class="game-genres">
                   {% for g in game.genres.split(",") %}
-                  <a class="genre"
+                  <a class="genre{% if g.strip() in request.args.get('genre', "") %}-hilit{% endif %}"
                     href="{{ url_for('results') }}?genre={{ g.strip()|urlencode }}{% if query %}&query={{ query|urlencode }}{% endif %}{% if request.args.get('literal') %}&literal=literal{% endif %}">
                     {{ g.strip() }}
                   </a>

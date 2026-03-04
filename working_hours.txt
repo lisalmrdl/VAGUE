@@ -88,3 +88,6 @@ Ina: Readme update, clickable search buttons for search results, identifying pro
 
 23/02 - 1 hour
 Ivan: Weighted similarity with the number of ratings and the rating score (the weights can be adjusted), it's implemented in a different function for the sake of reusability. Deleted some debug prints and unused comments.
+
+04/03 - 1 hour
+Suchanya: Fixed some styling and UX ~ made genre filtering more visible. Added (very) basic text preprocessing to the game description before querying for game recommendations based on similarity in the game_details page.
