@@ -76,8 +76,8 @@
 
           {% if results|length > 0 %}
           <div class="metadata-view">
-            <img src="/static/plots/ranking.png" alt="there should be a plot here :(">
-            <img src="/static/plots/genres_pie.png" alt="there should be a plot here :(">
+            <img src="{{ url_for('static', filename='/plots/ranking.png') }}" alt="there should be a plot here :(">
+            <img src="{{ url_for('static', filename='/plots/genres_pie.png') }}" alt="there should be a plot here :(">
           </div>
           {% else %}
           <div class="metadata-view">

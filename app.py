@@ -87,12 +87,13 @@ def results():
 
     results = query_backend(query, query_mode)
     genre = (request.args.get("genre") or "").strip()
-    if genre:
+    if genre: # this seems to filter the search by genres which is good
         gl = genre.lower()
         results = [
             r for r in results
             if gl in [p.strip().lower() for p in (r.get("genres") or "").split(",")]
         ]
+        
     if len(results) < 1:
         return render_template(
             "search.html",

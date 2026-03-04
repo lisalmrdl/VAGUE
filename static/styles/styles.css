@@ -54,7 +54,10 @@ a:hover {
     text-decoration: underline;
     color: var(--color-mono-w);
 }
-
+body a:link, body a:visited {
+    color: var(--color-mono-b);
+    text-decoration: none;
+}
 header {
     padding: 5px 25px;
     font-family: 'Jersey 25', sans-serif;
@@ -189,7 +192,6 @@ header {
     justify-content: space-between;
     gap: 15px;
 }
-
 .game-results {
     display: flex;
     flex-direction: column;
@@ -234,12 +236,25 @@ header {
 .game-publisher {
     font-size: 0.8em;
 }
+
+.game-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+}
 .genre {
     font-size: 0.7em;
     background-color: var(--color-accent-lr);
     border-radius: 5px;
-    padding: 2px 6px 0px 6px;
+    padding: 2px 8px 0px 8px;
 }
+.genre:hover {
+    font-size: 0.73em;
+    background-color: var(--color-accent-r);
+    color: var(--color-mono-w);
+    transition: 0.1s ease;
+}
+
 .game-rating {
     font-size: 1.6rem;
     font-weight: bold;
