@@ -26,7 +26,7 @@ html {
     --color-accent-b: #b4c4d0;
 
     --color-accent-dr: #7d2e2c;
-    --color-accent-db:#8ca4b7;
+    --color-accent-db: #8ca4b7;
 
     --color-accent-lr: hsl(2, 68%, 87%);
 
@@ -277,6 +277,17 @@ header {
 .metadata-view img {
     max-width: 85%;
     justify-content: center;
+}
+.ratings-plot h3, .genres-plot h3 {
+    font-size: 0.8em;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+.ratings-plot, .genres-plot {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .help {

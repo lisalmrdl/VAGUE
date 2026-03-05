@@ -91,3 +91,6 @@ Ivan: Weighted similarity with the number of ratings and the rating score (the w
 
 04/03 - 1 hour
 Suchanya: Fixed some styling and UX ~ made genre filtering more visible. Added (very) basic text preprocessing to the game description before querying for game recommendations based on similarity in the game_details page.
+
+05/03 - 2 hour
+Suchanya: More styling, I tried to make the plots a little more consistent with the website theme (time really flies when doing frontend...). Added some content to the About page.

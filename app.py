@@ -91,24 +91,6 @@ def results():
     query_mode = request.args.get("literal", "0") == "literal"
     # print(query_mode)
 
-    
-    # df_results = engine.show_results(engine.smart_search_router(query, query_mode))  # db version
-
-    # if df_results is None or df_results.empty:
-    #     return render_template(
-    #         "search.html",
-    #         query=query,
-    #         results={}
-    #     )
-
-    # # TODO: change this, I am going to do something very ugly and inefficient
-    # results = []
-    # for i in df_results.index:
-    #     # print(i)
-    #     results.append(df_results.loc[i].to_dict())
-    #     results[-1]["id"] = i
-    # # pprint(results[0])
-
     results = query_backend(query, query_mode)
     genre = (request.args.get("genre") or "").strip()
     
@@ -125,16 +107,25 @@ def results():
             query=query,
             results={}
         )
-    
+
+    # NOTE This creates a list for displaying all genres in the sidebar along with the plots. It functions exactly like the clikcable genres in the game cards, so it's not really necessary. I'm leaving it out for now.
+    # all_genres = []
+    # for result in results:
+    #     genres_str = result.get("genres") or ""
+    #     genres_list = [g.strip() for g in genres_str.split(",") if g.strip()]
+    #     all_genres.extend(genres_list)
+    #     found_genres = sorted(set(all_genres))
+        
     ids = [r["id"] for r in results]
 
     plot_ratings(ids)
-    plot_genre_pie(ids)
+    plot_genre_pie(ids, top_n=5)
     
     return render_template(
         "search.html",
         query=query,
         results=results
+        # genres=found_genres
     )    
     
 @app.route("/game/<int:game_id>")
@@ -147,7 +138,7 @@ def game_details(game_id):
     game = df_game.iloc[0].to_dict()
     game["id"] = game_id
 
-    # still using a shortened description, but I made a very basic preprocessing function to maybe fit more content into the query
+    # NOTE still using a shortened description, but I made a very basic preprocessing function to maybe fit more content into the query
     # this comes before markdown so the text doesn't have the html formatting
     short_desc = quick_preprocess(game["desc"][:2000])
     

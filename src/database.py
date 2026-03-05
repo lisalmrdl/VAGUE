@@ -35,13 +35,45 @@ def plot_ratings(ids: list, output_file=path / ".." / "static" / "plots" / "rank
         ids (list): list containing the games' ids
         output_file (_type_, optional): Path to the file where the plot image will be saved. Defaults to ./../static/plots/ranking.png
     """
+    # Styling Variables
+    FONT_SIZE = 16
+    plt.rcParams["xtick.labelsize"] = FONT_SIZE
+    plt.rcParams["ytick.labelsize"] = FONT_SIZE
+
+    # Accent colors to match site
+    COLOR_BLACK = "#2d232e"
+    COLOR_RED = "#b0413e"
+    COLOR_WHITE = "#f4f4f4"
+    COLOR_GREY = "#ccc"
+
     data = pd.read_sql(get_all_gamedata(ids=ids, as_text=True), get_db())["rating"]
-    plt.figure()
-    plt.hist(data, bins=np.linspace(0, 5, 11),color="red",edgecolor="white")
-    plt.xticks(range(6))
+
+    fig, ax = plt.subplots()
+    fig.patch.set_facecolor(COLOR_WHITE)
+    ax.set_facecolor(COLOR_WHITE)
+
+    ax.hist(data, bins=np.linspace(0, 5, 11), color=COLOR_RED, edgecolor=COLOR_WHITE)
+    ax.set_xticks(range(6))
+    
+    # Hide all but bottom spine
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_visible(False)
+    ax.spines["top"].set_visible(False)
+    
+    ax.spines["bottom"].set_color(COLOR_BLACK)
+    ax.tick_params(axis="x", colors=COLOR_BLACK)
+
+    ax.yaxis.set_ticks_position("left")
+    ax.xaxis.set_ticks_position("bottom")
+    
+    ax.set_axisbelow(True)
+    ax.grid(axis="y", color=COLOR_GREY, alpha=0.6, linewidth=0.7)
+
+    plt.title("Rating Distribution")
     plt.xlabel("Rating")
     plt.ylabel("Frequency")
-    plt.title("Rating distribution")
+    
+    plt.tight_layout()
     plt.savefig(output_file)
     plt.close()
 
@@ -53,12 +85,18 @@ def plot_genre_pie(ids: list, output_file=path / ".." / "static" / "plots" / "ge
         output_file (_type_, optional): Path to the file where the plot image will be saved. Defaults to ./../static/plots/ranking.png
         top_n (int): Only the top n will be displayed, the others will be displayed as "Other". Defaults to 7.
     """
+    # Colors to match site palette
+    COLOR_SCHEME = ["#be6663", "#bccdda", "#f7ffe9", "#c9dad4", "#edc2b2"]
+    
     data = pd.read_sql(get_genres(ids=ids, as_text=True), get_db())
     counts = pd.Series(data["count"].iloc[:top_n].tolist(), index=data["genres"][:top_n])
     counts["Other"] = sum(data["count"][top_n:])
     del data
-    cmap = plt.cm.hsv
-    colors = cmap(np.linspace(0, 1, 5))
+    # cmap = plt.cm.hsv
+    # colors = cmap(np.linspace(0, 1, 5))
+    
+    colors = [COLOR_SCHEME[i % len(COLOR_SCHEME)] for i in range(len(counts)-1)] + ["#ccc"] # The site palette is not suited to pie charts :(
+
     plt.figure()
     plt.pie(
         counts,
@@ -66,11 +104,12 @@ def plot_genre_pie(ids: list, output_file=path / ".." / "static" / "plots" / "ge
         autopct="%1.1f%%",
         startangle=90,
         counterclock=False,
-        wedgeprops={"edgecolor": "black"},
+        wedgeprops={"edgecolor": "#2d232e"},
         colors=colors
     )
-    plt.title("Genre distribution")
+    plt.title("Genre Distribution")
     plt.axis("equal")
+
     plt.savefig(output_file)
     plt.close()
 

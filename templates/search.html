@@ -75,8 +75,20 @@
 
           {% if results|length > 0 %}
           <div class="metadata-view">
-            <img src="{{ url_for('static', filename='/plots/ranking.png') }}" alt="there should be a plot here :(">
-            <img src="{{ url_for('static', filename='/plots/genres_pie.png') }}" alt="there should be a plot here :(">
+            <div class="ratings-plot">
+              <!-- <h3>Results Rating Distribution</h3>  -->
+              <img src="{{ url_for('static', filename='/plots/ranking.png') }}" alt="there should be a plot here :(">
+            </div>
+            <div class="genres-plot">
+              <!-- <h3>Genre Distribution</h3>      -->
+              <img src="{{ url_for('static', filename='/plots/genres_pie.png') }}" alt="there should be a plot here :(">
+              <!-- <div class="genres-list"> -->
+              <!--   {% for g in genres %} -->
+              <!--   <a class="genre{% if g in request.args.get('genre', "") %}-hilit{% endif %}" -->
+              <!--      href="{{ url_for('results') }}?genre={{ g|urlencode }}{% if query %}&query={{ query|urlencode }}{% endif %}{% if request.args.get('literal') %}&literal=literal{% endif %}">{{ g }}</a> -->
+              <!--   {% endfor %} -->
+              <!-- </div> -->
+            </div>
           </div>
           {% else %}
           <div class="metadata-view">
