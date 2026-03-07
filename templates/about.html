@@ -30,9 +30,9 @@
     
     <div class="body-container">
         <h2>Thanks for trying out V.A.G.U.E.!</h2>
-        <p>This project was developed as part of the <b class="accent">Building NLP Applications</b> course at the University of Helsinki.</p>
-        <p>The goal was to understand and apply NLP and information retrieval strategies such as Boolean search, TF-IDF, and neural search, by implementing a simple search engine.</p>
-        <p>We also used data visualization and user experience (UX) design techniques to make the website more accessible and engaging.</p>
+        <p>This search engine was developed as part of the <b class="accent">Building NLP Applications</b> course at the University of Helsinki.</p>
+        <p>Our goal was to understand the usage of NLP and information retrieval strategies by implementing a simple search engine. It allows the user to search a database of almost 10.000 games using exact titles, genres, keywords, or similarity-based queries.</p>
+	<p>As retrieval strategies we used Boolean serach, TF-IDF, and neural search. Then we built an easy accessible web interface around it to facilitate the usage. We also used data visualization and user experience (UX) design techniques to make the website more accessible and engaging.</p>
         <p>The project was implemented in Python and relies on libraries such as Pandas, NumPy, Flask, Matplotlib, sqlite3, Sentence Transformers, and scikit-learn.</p>
         <h4>Team Members:</h4>
         <ul>
@@ -44,7 +44,7 @@
     </div>
 
     <footer>
-        <a action="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('about') }}">About</a>
         <a href="https://github.com/lisalmrdl/VAGUE">Github</a>
         <p>&copy; 2026 V.A.G.U.E. All rights reserved.</p>
     </footer>
