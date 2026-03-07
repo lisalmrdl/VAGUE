@@ -68,9 +68,14 @@ VAGUE/
 **Start the application:** <br>
   python app.py <br>
 **open in your browser:** <br>
-  http://127.0.0.1:5000 or click [HERE](http://127.0.0.1:5000)
+  http://127.0.0.1:5000 or click [HERE](http://127.0.0.1:5000) <br>
 
-GIF
+**Neural Search Demo** <br>
+  ![Neural search demo](static/demo/neural_search.gif) <br>
+**Literal Search Demo** <br>
+  ![Literal search demo](static/demo/literal_search.gif) <br>
+**Genre Filtering** <br>
+  ![Genre filtering demo](static/demo/clickable_genre.gif) <br>
 
 
 ## Team
