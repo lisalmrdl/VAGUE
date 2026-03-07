@@ -47,7 +47,11 @@
           <p><b>Tags:</b></p>
           <ul class="genres-list">
             {% for genre in game.genres.split(",") %}
-          <li class="tag">{{ genre.strip() }}</li>
+          <li class="tag">
+            <a href="{{ url_for('results', query=genre.strip(), genre=genre.strip()) }}">
+              {{ genre.strip() }}
+            </a>
+          </li>
           {% endfor %}
           </ul>
         </div>
