@@ -94,3 +94,6 @@ Suchanya: Fixed some styling and UX ~ made genre filtering more visible. Added (
 
 05/03 - 2 hour
 Suchanya: More styling, I tried to make the plots a little more consistent with the website theme (time really flies when doing frontend...). Added some content to the About page.
+
+07/03 - 3 hours
+Ina: refining about-page, redefining readme, adding clickable genres
