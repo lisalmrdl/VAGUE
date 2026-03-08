@@ -97,3 +97,6 @@ Suchanya: More styling, I tried to make the plots a little more consistent with 
 
 07/03 - 3 hours
 Ina: refining about-page, redefining readme, adding clickable genres
+
+08/03 - 2 hours
+Lisa: Finally commented my code with docstrings for each function + I corrected the exact match for it to work in the description and in the title
