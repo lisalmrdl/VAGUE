@@ -23,7 +23,7 @@ print("Vectors loading...")
 
 #tf-idf
 tfidf_matrix = db.load_tfidf_vectors()
-#doing the list of words for the wildcard search
+#creating the list of words for the wildcard search
 vocab_cols = pd.Series(tfidf_matrix.columns) 
 
 #boolean
@@ -38,6 +38,16 @@ neural_model = SentenceTransformer("sentence-transformers/paraphrase-multilingua
 ######## FUNCTIONS #######
 
 def show_results(game_ids):
+    """
+    Retrieves and displays game data for a given list of game IDs.
+
+    Args:
+        game_ids (list): A list of integer game IDs to retrieve.
+
+    Returns:
+        pd.DataFrame: A DataFrame containing the formatted game details 
+        (name, genres, date, desc, meta, img, rating, devs, pubs), or None if no games are found.
+    """
     if not game_ids:
         print("No game found.")
         return
@@ -48,6 +58,7 @@ def show_results(game_ids):
     #converting in dataframe
     cols = ["id", "name", "genres", "desc", "devs", "pubs", "img", "web", "sold", "rating", "count", "meta", "date"]
     df_res = pd.DataFrame(rows, columns=cols)
+    
     #only keeping the "interesting" informations
     display_cols = ["name", "genres", "date", "desc", "meta", "img", "rating", "devs", "pubs"]
     
@@ -57,6 +68,20 @@ def show_results(game_ids):
     return df_res[display_cols]
 
 def weighted_similarity(query_vec, matrix, sort=True, weights=[0.8, 0.1, 0.1]):
+    """
+    Calculates the cosine similarity between a query vector and a matrix, 
+    and applies custom weights based on similarity, rating, and rating count.
+
+    Args:
+        query_vec (np.ndarray): The vectorized search query.
+        matrix (pd.DataFrame): The matrix of game embeddings/vectors to compare against.
+        sort (bool, optional): Whether to sort the results. Defaults to True.
+        weights (list, optional): Weights applied to [similarity_score, rating, ratings_count]. 
+                                  Defaults to [0.8, 0.1, 0.1].
+
+    Returns:
+        pd.Series: A pandas Series of weighted scores, indexed by game IDs, sorted descending.
+    """
     similarities = cosine_similarity(query_vec, matrix.values)[0]
     # 4. Results
     w = db.get_similarity_weights(matrix.index)
@@ -64,10 +89,25 @@ def weighted_similarity(query_vec, matrix, sort=True, weights=[0.8, 0.1, 0.1]):
     return weigthed_scores.sort_values(ascending=False)
 
 def smart_search_router(query: str, literal_search: bool, top_k: int = 100):
+    """
+    Routes the search query to the appropriate search algorithm based on user parameters 
+    and query syntax (Boolean, TF-IDF, or Neural).
+
+    Args:
+        query (str): The search query string.
+        literal_search (bool): If True, forces Boolean or TF-IDF. If False, uses Neural search.
+        top_k (int, optional): The maximum number of results to return. Defaults to 100.
+
+    Returns:
+        list: A list of matched game IDs based on the selected search strategy.
+    """
     #text for the exact match
     all_data = pd.read_sql(db.get_text_gamedata(as_text=True), db.get_db()) # NOTE: No need to load de data yet. We can first compute the search. DELETE
     if not all_data.empty:
-        search_text_ref = all_data.set_index('id_game')['description'].fillna("").str.lower()
+        all_data_indexed = all_data.set_index('id_game')
+        titles = all_data_indexed['name'].fillna("")
+        descriptions = all_data_indexed['description'].fillna("")
+        search_text_ref = (titles + " " + descriptions).str.lower()
     else:
         search_text_ref = pd.Series()
 
@@ -99,7 +139,18 @@ def smart_search_router(query: str, literal_search: bool, top_k: int = 100):
     return results
 
 def parse_query(query: str):
-#extracting the exact sentence depending on the typing
+    """
+    Parses a search query to extract exact sentence matches and individual tokens.
+
+    Args:
+        query (str): The raw search query.
+
+    Returns:
+        tuple: A tuple containing:
+            - phrases (list): A list of exact match phrases found within quotes.
+            - tokens (list): A list of cleaned, individual word tokens (lowercased).
+    """
+    #extracting the exact sentence depending on the typing
     #in quote text
     phrases = re.findall(r'"([^"]*)"', query)
     
@@ -112,6 +163,17 @@ def parse_query(query: str):
     return phrases, tokens
 
 def expand_token(token: str, vocab: pd.Series):
+    """
+    Expands a search token by resolving wildcards or applying stemming 
+    against a known vocabulary.
+
+    Args:
+        token (str): The individual word token to expand.
+        vocab (pd.Series): A pandas Series containing the recognized vocabulary.
+
+    Returns:
+        list: A list of matched vocabulary words.
+    """
 #wildcard and stemming
     #Explicite wildcard
     if '*' in token:
@@ -133,7 +195,17 @@ def expand_token(token: str, vocab: pd.Series):
 
 # Neural Search (testing)
 def search_neural(query: str, matrix: pd.DataFrame, top_k: int = 100):
+"""
+    Executes a semantic search using neural network embeddings.
 
+    Args:
+        query (str): The raw search query.
+        matrix (pd.DataFrame): The database matrix of neural embeddings.
+        top_k (int, optional): The maximum number of results to return. Defaults to 100.
+
+    Returns:
+        list: A list of matching game IDs sorted by weighted similarity.
+    """
     # TODO Parse query to handle exact matches, skipped for now. Currently encodes the entire query
     # phrases, raw_tokens = parse_query(query)
 
@@ -152,6 +224,20 @@ def search_neural(query: str, matrix: pd.DataFrame, top_k: int = 100):
 
 #TF-IDF (by default)
 def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: int = 100):
+    """
+    Executes a keyword-based search using Term Frequency-Inverse Document Frequency (TF-IDF).
+    Also filters results to enforce exact phrase matches if quotes are used.
+
+    Args:
+        query (str): The search query.
+        matrix (pd.DataFrame): The pre-computed TF-IDF matrix.
+        text_ref (pd.Series): A pandas Series containing the reference text (e.g., descriptions) 
+                              to check exact phrase matches against.
+        top_k (int, optional): The maximum number of results to return. Defaults to 100.
+
+    Returns:
+        list: A list of matching game IDs sorted by relevance.
+    """
     #parsing
     phrases, raw_tokens = parse_query(query)
     
@@ -209,7 +295,18 @@ def search_tfidf(query: str, matrix: pd.DataFrame, text_ref: pd.Series, top_k: i
 
 #BOOLEAN (Strict logic)
 def search_boolean(query: str, matrix: pd.DataFrame, top_k: int = 100):
-#only with a logic request and, or, not
+    """
+    Executes a strict Boolean search evaluating AND, OR, and NOT logical operators.
+
+    Args:
+        query (str): The search query containing boolean operators.
+        matrix (pd.DataFrame): The boolean matrix mapping words to document presence.
+        top_k (int, optional): The maximum number of results to return. Defaults to 100.
+
+    Returns:
+        list or None: A list of matching game IDs, or None if the query parsing fails.
+    """
+    #only with a logic request and, or, not
     #cleaning and transition sql to panda
     trans = query.replace(" AND ", " & ").replace(" OR ", " | ").replace(" NOT ", " ~").replace("(", " ( ").replace(")", " ) ")
     
